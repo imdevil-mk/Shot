@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Shot"
-include ':app'
-include ':lib_netease'
+include(":app")
+include(":lib_netease")
