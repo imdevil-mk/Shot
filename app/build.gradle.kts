@@ -1,15 +1,10 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    id("imdevil.shot.application")
 }
 
 android {
-    compileSdk = 32
-
     defaultConfig {
         applicationId = "com.imdevil.shot"
-        minSdk = 29
-        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -25,26 +20,28 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.3.0")
-    implementation("com.google.android.material:material:1.5.0-alpha04")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(project(":lib_netease"))
+
+    implementation(libs.android.material)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.viewpager2)
+
+    implementation(libs.glide.core)
+    annotationProcessor(libs.glide.compiler)
+
+    testImplementation(libs.junit4)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

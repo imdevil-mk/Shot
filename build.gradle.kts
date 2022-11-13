@@ -1,8 +1,16 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+    }
+}
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application") version "7.2.2" apply false
-    id("com.android.library") version "7.2.2" apply false
-    id("org.jetbrains.kotlin.android") version "1.7.10" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.secrets) apply false
 }
 
 tasks.register<Delete>("clean") {
