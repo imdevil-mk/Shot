@@ -3,26 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/mainViewPagerFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.imdevil.shot.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:id="@+id/mainViewPagerFragment"
+        android:name="com.imdevil.shot.common.ui.mainviewpager.MainViewPagerFragment"
+        android:label="fragment_main_view_pager"
+        tools:layout="@layout/fragment_main_view_pager">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_mainViewPagerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.imdevil.shot.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
 
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.imdevil.shot.netease.ui.login.NeteaseLoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_netease_login" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_loginFragment_to_mainViewPagerFragment"
+            app:destination="@id/mainViewPagerFragment" />
     </fragment>
 </navigation>
