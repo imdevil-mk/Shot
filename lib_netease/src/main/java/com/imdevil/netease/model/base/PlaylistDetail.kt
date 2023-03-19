@@ -1,0 +1,110 @@
+package com.imdevil.netease.model.base
+
+
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class PlaylistDetail(
+    /*
+    @Json(name = "algTags")
+    val algTags: Any?,
+    @Json(name = "backgroundCoverId")
+    val backgroundCoverId: String,
+    @Json(name = "backgroundCoverUrl")
+    val backgroundCoverUrl: Any?,
+    @Json(name = "bannedTrackIds")
+    val bannedTrackIds: Any?,
+    @Json(name = "cloudTrackCount")
+    val cloudTrackCount: String,
+    @Json(name = "commentCount")
+    val commentCount: String,
+    @Json(name = "commentThreadId")
+    val commentThreadId: String,
+    @Json(name = "copied")
+    val copied: Boolean,
+    @Json(name = "englishTitle")
+    val englishTitle: Any?,
+    @Json(name = "gradeStatus")
+    val gradeStatus: String,
+    @Json(name = "highQuality")
+    val highQuality: Boolean,
+    @Json(name = "historySharedUsers")
+    val historySharedUsers: Any?,
+    @Json(name = "mvResourceInfos")
+    val mvResourceInfos: Any?,
+    @Json(name = "newImported")
+    val newImported: Boolean,
+    @Json(name = "officialPlaylistType")
+    val officialPlaylistType: Any?,
+    @Json(name = "opRecommend")
+    val opRecommend: Boolean,
+    @Json(name = "ordered")
+    val ordered: Boolean,
+    @Json(name = "playCount")
+    val playCount: String,
+    @Json(name = "privacy")
+    val privacy: String,
+    @Json(name = "relateResType")
+    val relateResType: Any?,
+    @Json(name = "remixVideo")
+    val remixVideo: Any?,
+    @Json(name = "score")
+    val score: Any?,
+    @Json(name = "shareCount")
+    val shareCount: String,
+    @Json(name = "sharedUsers")
+    val sharedUsers: Any?,
+    @Json(name = "specialType")
+    val specialType: String,
+    @Json(name = "status")
+    val status: String,
+    @Json(name = "subscribed")
+    val subscribed: Boolean,
+    @Json(name = "subscribedCount")
+    val subscribedCount: String,
+    @Json(name = "subscribers")
+    val subscribers: List<Any>,
+    @Json(name = "tags")
+    val tags: List<Any>,
+    @Json(name = "titleImage")
+    val titleImage: String,
+    @Json(name = "titleImageUrl")
+    val titleImageUrl: Any?,
+    @Json(name = "trackCount")
+    val trackCount: String,
+    @Json(name = "trackNumberUpdateTime")
+    val trackNumberUpdateTime: Long,
+    @Json(name = "trackUpdateTime")
+    val trackUpdateTime: Long,
+    @Json(name = "updateFrequency")
+    val updateFrequency: Any?,
+    @Json(name = "updateTime")
+    val updateTime: Long,
+    @Json(name = "videoIds")
+    val videoIds: Any?,
+    @Json(name = "videos")
+    val videos: Any?,
+    */
+
+    @Json(name = "id")
+    val id: String,
+    @Json(name = "name")
+    val name: String,
+    @Json(name = "userId")
+    val userId: String,
+    @Json(name = "coverImgId")
+    val coverImgId: String,
+    @Json(name = "coverImgUrl")
+    val coverImgUrl: String,
+    @Json(name = "createTime")
+    val createTime: Long,
+    @Json(name = "description")
+    val description: String?,
+    @Json(name = "creator")
+    val creator: Creator,
+    @Json(name = "tracks")
+    val tracks: List<Song>,
+    @Json(name = "privileges")
+    val privileges: List<Privilege>
+)

@@ -2,7 +2,7 @@ package com.imdevil.shot.netease.ui.user
 
 import com.imdevil.netease.NeteaseManager
 import com.imdevil.netease.model.ApiResponse
-import com.imdevil.netease.model.user.LoginStatusResponse
+import com.imdevil.netease.model.response.LoginStatusResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

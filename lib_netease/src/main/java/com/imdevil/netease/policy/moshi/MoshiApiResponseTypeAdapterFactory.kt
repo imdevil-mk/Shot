@@ -1,4 +1,4 @@
-package com.imdevil.netease.policy.adapters
+package com.imdevil.netease.policy.moshi
 
 import com.imdevil.netease.model.ApiResponse
 import com.squareup.moshi.*

@@ -1,0 +1,151 @@
+{
+  "songs": [
+    {
+      "name": "没有理想的人不伤心",
+      "id": 28009051,
+      "pst": 0,
+      "t": 0,
+      "ar": [
+        {
+          "id": 13282,
+          "name": "新裤子",
+          "tns": [],
+          "alias": []
+        }
+      ],
+      "alia": [
+        "电影《缝纫机乐队》插曲"
+      ],
+      "pop": 100.0,
+      "st": 0,
+      "rt": "",
+      "fee": 8,
+      "v": 46,
+      "crbt": null,
+      "cf": "",
+      "al": {
+        "id": 34555329,
+        "name": "生命因你而火热",
+        "picUrl": "https://p1.music.126.net/w4J5DXSUimF5P0iDEzqy9w==/1393081236950048.jpg",
+        "tns": [],
+        "pic": 1393081236950048
+      },
+      "dt": 341053,
+      "h": {
+        "br": 320001,
+        "fid": 0,
+        "size": 13644321,
+        "vd": -60249.0,
+        "sr": 44100
+      },
+      "m": {
+        "br": 192001,
+        "fid": 0,
+        "size": 8186610,
+        "vd": -57665.0,
+        "sr": 44100
+      },
+      "l": {
+        "br": 128001,
+        "fid": 0,
+        "size": 5457755,
+        "vd": -56057.0,
+        "sr": 44100
+      },
+      "sq": {
+        "br": 1673200,
+        "fid": 0,
+        "size": 71331316,
+        "vd": -60241.0,
+        "sr": 44100
+      },
+      "hr": null,
+      "a": null,
+      "cd": "1",
+      "no": 3,
+      "rtUrl": null,
+      "ftype": 0,
+      "rtUrls": [],
+      "djId": 0,
+      "copyright": 1,
+      "s_id": 0,
+      "mark": 8192,
+      "originCoverType": 1,
+      "originSongSimpleData": null,
+      "tagPicList": null,
+      "resourceState": true,
+      "version": 46,
+      "songJumpInfo": null,
+      "entertainmentTags": null,
+      "awardTags": null,
+      "single": 0,
+      "noCopyrightRcmd": null,
+      "rurl": null,
+      "mst": 9,
+      "cp": 22020,
+      "rtype": 0,
+      "mv": 205053,
+      "publishTime": 1459987346600
+    }
+  ],
+  "privileges": [
+    {
+      "id": 28009051,
+      "fee": 8,
+      "payed": 0,
+      "st": 0,
+      "pl": 128000,
+      "dl": 0,
+      "sp": 7,
+      "cp": 1,
+      "subp": 1,
+      "cs": false,
+      "maxbr": 999000,
+      "fl": 128000,
+      "toast": false,
+      "flag": 4,
+      "preSell": false,
+      "playMaxbr": 999000,
+      "downloadMaxbr": 999000,
+      "maxBrLevel": "lossless",
+      "playMaxBrLevel": "lossless",
+      "downloadMaxBrLevel": "lossless",
+      "plLevel": "standard",
+      "dlLevel": "none",
+      "flLevel": "standard",
+      "rscl": null,
+      "freeTrialPrivilege": {
+        "resConsumable": false,
+        "userConsumable": false,
+        "listenType": null
+      },
+      "chargeInfoList": [
+        {
+          "rate": 128000,
+          "chargeUrl": null,
+          "chargeMessage": null,
+          "chargeType": 0
+        },
+        {
+          "rate": 192000,
+          "chargeUrl": null,
+          "chargeMessage": null,
+          "chargeType": 1
+        },
+        {
+          "rate": 320000,
+          "chargeUrl": null,
+          "chargeMessage": null,
+          "chargeType": 1
+        },
+        {
+          "rate": 999000,
+          "chargeUrl": null,
+          "chargeMessage": null,
+          "chargeType": 1
+        }
+      ]
+    }
+  ],
+  "code": 200
+}

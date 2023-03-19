@@ -17,10 +17,6 @@ interface ICookie {
     fun add(key: String, value: String)
 
     fun toEncodeString(): String
-
-    fun saveUserProfile(profile: String)
-
-    fun getUserProfile(): String?
 }
 
 const val ANONYMOUS_TOKEN =

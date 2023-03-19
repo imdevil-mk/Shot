@@ -3,13 +3,14 @@ package com.imdevil.netease
 import android.util.Log
 import cn.hutool.crypto.SecureUtil
 import com.imdevil.netease.model.ApiResponse
-import com.imdevil.netease.model.user.LoginResponse
+import com.imdevil.netease.model.response.LoginResponse
 import com.imdevil.netease.policy.adapters.CatchingCallAdapterFactory
 import com.imdevil.netease.policy.adapters.LoginCallAdapterFactory
-import com.imdevil.netease.policy.adapters.MoshiApiResponseTypeAdapterFactory
 import com.imdevil.netease.policy.cookie.ICookie
 import com.imdevil.netease.policy.interceptor.NeteaseHostInterceptor
 import com.imdevil.netease.policy.interceptor.NeteaseInterceptor
+import com.imdevil.netease.policy.moshi.DefaultIfNullFactory
+import com.imdevil.netease.policy.moshi.MoshiApiResponseTypeAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -47,6 +48,7 @@ class NeteaseManager private constructor(
 
             val moshi = Moshi.Builder()
                 .add(MoshiApiResponseTypeAdapterFactory())
+                .add(DefaultIfNullFactory())
                 .addLast(KotlinJsonAdapterFactory())
                 .build()
 
