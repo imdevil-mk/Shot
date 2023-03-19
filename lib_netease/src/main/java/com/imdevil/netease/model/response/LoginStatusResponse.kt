@@ -1,6 +1,8 @@
-package com.imdevil.netease.model.user
+package com.imdevil.netease.model.response
 
 
+import com.imdevil.netease.model.user.Account
+import com.imdevil.netease.model.user.Profile
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

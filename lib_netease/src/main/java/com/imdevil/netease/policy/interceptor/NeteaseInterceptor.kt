@@ -2,10 +2,10 @@ package com.imdevil.netease.policy.interceptor
 
 import cn.hutool.json.JSONObject
 import com.imdevil.netease.crypto.Crypto
-import com.imdevil.netease.policy.*
 import com.imdevil.netease.policy.annotations.CryptoType
 import com.imdevil.netease.policy.annotations.NeteaseCrypto
 import com.imdevil.netease.policy.cookie.*
+import com.imdevil.netease.policy.getInterestedAnnotation
 import com.imdevil.netease.utils.print
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -23,7 +23,6 @@ class NeteaseInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val originRequest = chain.request()
-
 
         val headers = mutableMapOf(
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.30 Safari/537.36",

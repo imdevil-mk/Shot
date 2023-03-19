@@ -1,7 +1,7 @@
 package com.imdevil.shot.data.model
 
-import com.imdevil.netease.model.user.LoginResponse
-import com.imdevil.netease.model.user.LoginStatusResponse
+import com.imdevil.netease.model.response.LoginResponse
+import com.imdevil.netease.model.response.LoginStatusResponse
 
 data class UserProfile(
     val uid: String,

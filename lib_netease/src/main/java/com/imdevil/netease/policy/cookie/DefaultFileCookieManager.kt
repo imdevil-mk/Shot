@@ -2,7 +2,7 @@ package com.imdevil.netease.policy.cookie
 
 import java.io.File
 
-class AndroidCookieManager(
+class DefaultFileCookieManager(
     private val file: File,
 ) : ICookie {
 
