@@ -8,7 +8,4 @@ class NeteaseRepository @Inject constructor(
     private val externalScope: CoroutineScope,
 ) {
 
-    suspend fun checkLoginStatus() {
-        
-    }
 }

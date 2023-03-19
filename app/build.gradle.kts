@@ -1,5 +1,12 @@
+import com.google.protobuf.gradle.builtins
+import com.google.protobuf.gradle.generateProtoTasks
+import com.google.protobuf.gradle.protobuf
+import com.google.protobuf.gradle.protoc
+
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("imdevil.shot.application")
+    alias(libs.plugins.protobuf)
 }
 
 android {
@@ -22,6 +29,25 @@ android {
     }
 }
 
+// Setup protobuf configuration, generating lite Java and Kotlin classes
+protobuf {
+    protoc {
+        artifact = libs.protobuf.protoc.get().toString()
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.builtins {
+                val java by registering {
+                    option("lite")
+                }
+                val kotlin by registering {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(project(":lib_netease"))
 
@@ -37,6 +63,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.viewpager2)
+
+    implementation(libs.androidx.dataStore.core)
+    implementation(libs.protobuf.kotlin.lite)
 
     implementation(libs.glide.core)
     annotationProcessor(libs.glide.compiler)

@@ -9,6 +9,10 @@ data class UserProfile(
     val avatar: String,
 )
 
+fun UserProfile.isEmpty(): Boolean {
+    return this.uid.isEmpty() && this.name.isEmpty() && this.avatar.isEmpty()
+}
+
 fun LoginStatusResponse.toUserProfile(uid: String): UserProfile {
     return UserProfile(
         uid,
