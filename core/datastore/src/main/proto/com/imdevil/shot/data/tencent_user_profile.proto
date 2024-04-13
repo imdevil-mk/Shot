@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "com/imdevil/shot/data/proto_cookie.proto";
+
+option java_package = "com.imdevil.shot.core.datastore";
+option java_multiple_files = true;
+
+message TencentUserProfile {
+  repeated ProtoCookie cookies = 1;
+  string uid = 2;
+  string name = 3;
+  string avtar = 4;
+}

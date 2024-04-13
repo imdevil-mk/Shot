@@ -1,7 +1,7 @@
 buildscript {
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+        classpath(libs.kotlin.gradlePlugin)
+        classpath(libs.navigation.safe.args.plugin)
     }
 }
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -11,6 +11,8 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.secrets) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.android) apply false
 }
 
 tasks.register<Delete>("clean") {

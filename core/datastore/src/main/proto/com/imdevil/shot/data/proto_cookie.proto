@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "com.imdevil.shot.core.datastore";
+option java_multiple_files = true;
+
+message ProtoCookie {
+  string name = 1;
+  string value = 2;
+  string domain = 3;
+  string path = 5;
+  string expirationDate = 4;
+}

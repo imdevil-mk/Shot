@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="md_primary">#EBBCAD</color>
+    <color name="md_onPrimary">#47291F</color>
+    <color name="md_primaryContainer">#603F34</color>
+    <color name="md_onPrimaryContainer">#FFDBD0</color>
+    <color name="md_secondary">#D4C3BE</color>
+    <color name="md_onSecondary">#392E2B</color>
+    <color name="md_secondaryContainer">#504441</color>
+    <color name="md_onSecondaryContainer">#F1DFD9</color>
+    <color name="md_tertiary">#CEC6B1</color>
+    <color name="md_onTertiary">#353022</color>
+    <color name="md_tertiaryContainer">#4C4637</color>
+    <color name="md_onTertiaryContainer">#EBE2CC</color>
+    <color name="md_error">#FFB4AB</color>
+    <color name="md_onError">#690005</color>
+    <color name="md_errorContainer">#93000A</color>
+    <color name="md_onErrorContainer">#FFB4AB</color>
+    <color name="md_background">#1E1B1A</color>
+    <color name="md_onBackground">#E8E1DF</color>
+    <color name="md_surface">#1E1B1A</color>
+    <color name="md_onSurface">#E8E1DF</color>
+    <color name="md_surfaceVariant">#4C4544</color>
+    <color name="md_onSurfaceVariant">#CEC4C2</color>
+    <color name="md_outline">#978F8D</color>
+    <color name="md_shadow">#000000</color>
+    <color name="md_inverseSurface">#E8E1DF</color>
+    <color name="md_inverseOnSurface">#33302F</color>
+    <color name="md_inversePrimary">#7A564A</color>
+    <color name="md_surfaceTint">#EBBCAD</color>
+    <color name="md_surfaceTintColor">#EBBCAD</color>
+</resources>

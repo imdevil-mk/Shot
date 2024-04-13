@@ -1,0 +1,102 @@
+package com.imdevil.core.netease.bean
+
+
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+
+@JsonClass(generateAdapter = true)
+data class Profile(
+    @Json(name = "backgroundUrl")
+    val backgroundUrl: String?,
+    @Json(name = "detailDescription")
+    val detailDescription: String?,
+    @Json(name = "birthday")
+    val birthday: Long?,
+    @Json(name = "authenticated")
+    val authenticated: Boolean?,
+    @Json(name = "gender")
+    val gender: Int?,
+    @Json(name = "city")
+    val city: Int?,
+    @Json(name = "signature")
+    val signature: String?,
+    @Json(name = "followeds")
+    val followeds: Int?,
+    @Json(name = "description")
+    val description: String?,
+    @Json(name = "remarkName")
+    val remarkName: Any?,
+    @Json(name = "eventCount")
+    val eventCount: Int?,
+    @Json(name = "playlistBeSubscribedCount")
+    val playlistBeSubscribedCount: Int?,
+    @Json(name = "shortUserName")
+    val shortUserName: String?,
+    @Json(name = "accountStatus")
+    val accountStatus: Int?,
+    @Json(name = "locationStatus")
+    val locationStatus: Int?,
+    @Json(name = "avatarImgId")
+    val avatarImgId: Long?,
+    @Json(name = "defaultAvatar")
+    val defaultAvatar: Boolean?,
+    @Json(name = "avatarImgIdStr")
+    val avatarImgIdStr: String?,
+    @Json(name = "backgroundImgIdStr")
+    val backgroundImgIdStr: String?,
+    @Json(name = "province")
+    val province: Int?,
+    @Json(name = "nickname")
+    val nickname: String,
+    @Json(name = "expertTags")
+    val expertTags: Any?,
+    @Json(name = "djStatus")
+    val djStatus: Int?,
+    @Json(name = "avatarUrl")
+    val avatarUrl: String,
+    @Json(name = "authStatus")
+    val authStatus: Int?,
+    @Json(name = "accountType")
+    val accountType: Int?,
+    @Json(name = "follows")
+    val follows: Int?,
+    @Json(name = "vipType")
+    val vipType: Int?,
+    @Json(name = "userName")
+    val userName: String?,
+    @Json(name = "followed")
+    val followed: Boolean?,
+    @Json(name = "userId")
+    val userId: Int?,
+    @Json(name = "lastLoginIP")
+    val lastLoginIP: String?,
+    @Json(name = "lastLoginTime")
+    val lastLoginTime: Long?,
+    @Json(name = "authenticationTypes")
+    val authenticationTypes: Int?,
+    @Json(name = "mutual")
+    val mutual: Boolean?,
+    @Json(name = "avatarImgId_str")
+    val avatarImgId_Str: String?,
+    @Json(name = "createTime")
+    val createTime: Long?,
+    @Json(name = "authority")
+    val authority: Int?,
+    @Json(name = "anchor")
+    val anchor: Boolean?,
+    @Json(name = "userType")
+    val userType: Int?,
+    @Json(name = "backgroundImgId")
+    val backgroundImgId: Long?,
+    @Json(name = "viptypeVersion")
+    val viptypeVersion: Long?,
+    @Json(name = "experts")
+    val experts: Experts?,
+    @Json(name = "avatarDetail")
+    val avatarDetail: Any?,
+    @Json(name = "playlistCount")
+    val playlistCount: Int?
+) {
+    @JsonClass(generateAdapter = true)
+    class Experts
+}

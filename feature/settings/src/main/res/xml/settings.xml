@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:icon="@drawable/ic_server"
+        app:fragment="com.imdevil.shot.feature.settings.cookie.AddCookiesFragment"
+        app:key="instance"
+        app:summary="@string/tencent_instance_summary"
+        app:title="@string/tencent_instance" />
+</PreferenceScreen>

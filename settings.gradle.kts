@@ -17,4 +17,14 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Shot"
 include(":app")
-include(":lib_netease")
+include(":core:common")
+include(":core:network-common")
+include(":core:network-netease")
+include(":core:network-tencent")
+include(":core:model")
+include(":core:datastore")
+include(":core:data")
+
+include(":feature:settings")
+include(":feature:common")
+include(":feature:tencent")
