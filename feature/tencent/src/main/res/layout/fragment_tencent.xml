@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.imdevil.feature.tencent.TencentFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/hello"
-        android:layout_width="wrap_content"
+    <!-- todo 采用translationZ的方式来确保header一定绘制在最上面不优雅-->
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="?attr/colorAccent"
+        android:gravity="top|center_horizontal"
+        android:text="ToolBar"
+        android:textColor="@android:color/black"
+        android:translationZ="8dp"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageHeaderBehavior" />
+
+    <ImageView
+        android:id="@+id/user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/girl"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageUserProfileBehavior"
+        app:layout_depends="@id/header" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="tencent_instance_summary"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageTabLayoutBehavior"
+        app:layout_depends="@id/user_profile"
+        app:scroll_depends="@id/user_profile" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_cookies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tencent_instance_summary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <com.imdevil.shot.feature.common.widget.NestedScrollableHost
+        android:id="@+id/host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageContentBehavior"
+        app:layout_depends="@id/tab_layout"
+        app:measure_depends="@id/user_profile"
+        app:scroll_depends="@id/tab_layout">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.imdevil.shot.feature.common.widget.NestedScrollableHost>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomViewAttributes">
+        <attr name="layout_depends" format="reference" />
+        <attr name="measure_depends" format="reference" />
+        <attr name="scroll_depends" format="reference" />
+    </declare-styleable>
+</resources>
