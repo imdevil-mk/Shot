@@ -1,7 +1,6 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("imdevil.shot.library")
-    id("imdevil.shot.hilt")
+    alias(libs.plugins.shot.android.library)
+    alias(libs.plugins.shot.android.hilt)
 }
 
 android {
@@ -34,7 +33,7 @@ dependencies {
     api(libs.kotlinx.coroutines.android)
 
     api(libs.glide.core)
-    annotationProcessor(libs.glide.compiler)
+    kapt(libs.glide.compiler)
 
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidx.test.ext)

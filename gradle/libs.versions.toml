@@ -1,5 +1,7 @@
 [versions]
-androidGradlePlugin = "7.3.1"
+# AGP and tools should be updated together
+androidGradlePlugin = "8.3.0"
+androidTools = "31.3.0"
 
 androidMaterial = "1.6.1"
 
@@ -12,6 +14,7 @@ androidxFragment = "1.5.4"
 androidxNavigation = "2.5.3"
 androidxViewPager2 = "1.0.0"
 androidxDataStore = "1.0.0"
+androidxMacroBenchmark = "1.2.2"
 preference = "1.2.1"
 
 androidxWindowManager = "1.0.0"
@@ -20,7 +23,6 @@ androidxCoreSplashscreen = "1.0.0"
 androidxWork = "2.7.1"
 androidxAnnotation = "1.5.0"
 androidxEspresso = "3.5.0"
-androidxMacroBenchmark = "1.1.0"
 androidxMetrics = "1.0.0-alpha03"
 androidxProfileinstaller = "1.2.0"
 androidxTestCore = "1.5.0"
@@ -35,7 +37,7 @@ okhttp = "4.10.0"
 retrofit = "2.9.0"
 hilt = "2.44"
 hiltExt = "1.0.0"
-room = "2.5.0-beta01"
+room = "2.6.1"
 ksp = "1.7.20-1.0.8"
 lint = "30.3.1"
 moshi = "1.14.0"
@@ -54,7 +56,7 @@ coil = "2.2.2"
 jacoco = "0.8.7"
 junit4 = "4.13.2"
 protobuf = "3.21.9"
-protobufPlugin = "0.8.19"
+protobufPlugin = "0.9.1"
 secrets = "2.0.1"
 turbine = "0.12.1"
 junit = "1.1.5"
@@ -138,7 +140,10 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "room" }
 junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 navigation-safe-args-plugin = { group = "androidx.navigation", name = "navigation-safe-args-gradle-plugin", version.ref = "androidxNavigation" }
 
@@ -146,6 +151,7 @@ navigation-safe-args-plugin = { group = "androidx.navigation", name = "navigatio
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidxMacroBenchmark" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
@@ -153,3 +159,11 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+room = { id = "androidx.room", version.ref = "room" }
+
+# Plugins defined by this project
+shot-android-application = { id = "shot.android.application", version = "unspecified" }
+shot-android-hilt = { id = "shot.android.hilt", version = "unspecified" }
+shot-android-library = { id = "shot.android.library", version = "unspecified" }
+shot-android-lint = { id = "shot.android.lint", version = "unspecified" }
+shot-jvm-library = { id = "shot.jvm.library", version = "unspecified" }

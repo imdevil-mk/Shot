@@ -1,12 +1,6 @@
-import com.google.protobuf.gradle.builtins
-import com.google.protobuf.gradle.generateProtoTasks
-import com.google.protobuf.gradle.protobuf
-import com.google.protobuf.gradle.protoc
-
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("imdevil.shot.library")
-    id("imdevil.shot.hilt")
+    alias(libs.plugins.shot.android.library)
+    alias(libs.plugins.shot.android.hilt)
     alias(libs.plugins.protobuf)
 }
 
@@ -38,6 +32,7 @@ protobuf {
 
 androidComponents.beforeVariants {
     android.sourceSets.register(it.name) {
+        val buildDir = layout.buildDirectory.get().asFile
         java.srcDir(buildDir.resolve("generated/source/proto/${it.name}/java"))
         kotlin.srcDir(buildDir.resolve("generated/source/proto/${it.name}/kotlin"))
     }

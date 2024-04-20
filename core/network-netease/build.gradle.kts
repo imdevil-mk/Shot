@@ -1,6 +1,6 @@
 plugins {
-    id("imdevil.jvm.library")
-    id("kotlinx-serialization")
+    alias(libs.plugins.shot.jvm.library)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 dependencies {

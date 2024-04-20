@@ -1,5 +1,5 @@
 plugins {
-    id("imdevil.shot.application")
+    alias(libs.plugins.shot.android.application)
 }
 
 android {
@@ -24,6 +24,7 @@ android {
             )
         }
     }
+    namespace = "com.imdevil.shot"
 }
 
 dependencies {

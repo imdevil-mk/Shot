@@ -1,6 +1,6 @@
 plugins {
-    id("imdevil.shot.library")
-    id("imdevil.shot.hilt")
+    alias(libs.plugins.shot.android.library)
+    alias(libs.plugins.shot.android.hilt)
 }
 
 android {
