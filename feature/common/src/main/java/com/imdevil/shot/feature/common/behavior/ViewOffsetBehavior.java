@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-
 /**
  * Behavior will automatically sets up a {@link ViewOffsetHelper} on a {@link View}.
  */
@@ -19,8 +18,7 @@ public class ViewOffsetBehavior<V extends View> extends CoordinatorLayout.Behavi
     private int tempTopBottomOffset = 0;
     private int tempLeftRightOffset = 0;
 
-    public ViewOffsetBehavior() {
-    }
+    public ViewOffsetBehavior() {}
 
     public ViewOffsetBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);

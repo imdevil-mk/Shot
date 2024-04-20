@@ -5,5 +5,6 @@ package com.imdevil.core.netease.model
 annotation class NeteaseCrypto(val type: CryptoType = CryptoType.WEAPI)
 
 enum class CryptoType {
-    WEAPI, EAPI
+    WEAPI,
+    EAPI,
 }

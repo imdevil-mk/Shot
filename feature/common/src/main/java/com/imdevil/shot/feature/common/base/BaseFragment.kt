@@ -14,13 +14,13 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     abstract fun onCreateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): VB
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = onCreateViewBinding(inflater, container, savedInstanceState).also { _binding = it }.root
 
     override fun onDestroyView() {

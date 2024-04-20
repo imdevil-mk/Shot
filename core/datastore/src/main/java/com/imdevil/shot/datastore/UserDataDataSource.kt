@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class UserDataDataSource @Inject constructor(
     private val tencentUserProfile: DataStore<TencentUserProfile>,
-    private val userPreferences: DataStore<UserPreferences>
+    private val userPreferences: DataStore<UserPreferences>,
 ) {
     val userData = userPreferences.data.map {
         UserData(
@@ -28,7 +28,7 @@ class UserDataDataSource @Inject constructor(
                 pc.value,
                 pc.domain,
                 pc.expirationDate,
-                pc.path
+                pc.path,
             )
         }
     }
@@ -42,15 +42,17 @@ class UserDataDataSource @Inject constructor(
     suspend fun setTencentCookies(newCookies: List<Cookie>) {
         tencentUserProfile.updateData {
             it.copy {
-                this.cookies.addAll(newCookies.map { cookie ->
-                    ProtoCookie.newBuilder()
-                        .setName(cookie.name)
-                        .setValue(cookie.value)
-                        .setDomain(cookie.domain)
-                        .setExpirationDate(cookie.expirationDate)
-                        .setPath(cookie.path)
-                        .build()
-                })
+                this.cookies.addAll(
+                    newCookies.map { cookie ->
+                        ProtoCookie.newBuilder()
+                            .setName(cookie.name)
+                            .setValue(cookie.value)
+                            .setDomain(cookie.domain)
+                            .setExpirationDate(cookie.expirationDate)
+                            .setPath(cookie.path)
+                            .build()
+                    },
+                )
             }
         }
     }

@@ -26,10 +26,10 @@ data class Playlist(
     @Json(name = "headurl")
     val creatorAvatar: String,
     @Json(name = "songlist")
-    val songBriefList: List<SongBrief>
+    val songBriefList: List<SongBrief>,
 ) {
     public fun toSingleLine(): String {
         val humanCreateTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(createTime))
-        return "$name ${creatorName}创建于${humanCreateTime}，拥有${songCount}首歌"
+        return "$name ${creatorName}创建于$humanCreateTime，拥有${songCount}首歌"
     }
 }

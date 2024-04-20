@@ -36,14 +36,22 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
     }
 
     @Override
-    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
+    public boolean layoutDependsOn(
+            @NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
         return dependsOnHelper.layoutDependsOn(parent, child, dependency);
     }
 
     @Override
-    public boolean onMeasureChild(@NonNull CoordinatorLayout parent, @NonNull View child, int parentWidthMeasureSpec, int widthUsed, int parentHeightMeasureSpec, int heightUsed) {
+    public boolean onMeasureChild(
+            @NonNull CoordinatorLayout parent,
+            @NonNull View child,
+            int parentWidthMeasureSpec,
+            int widthUsed,
+            int parentHeightMeasureSpec,
+            int heightUsed) {
         final int childLpHeight = child.getLayoutParams().height;
-        if (childLpHeight == ViewGroup.LayoutParams.MATCH_PARENT || childLpHeight == ViewGroup.LayoutParams.WRAP_CONTENT) {
+        if (childLpHeight == ViewGroup.LayoutParams.MATCH_PARENT
+                || childLpHeight == ViewGroup.LayoutParams.WRAP_CONTENT) {
             // If the menu's height is set to match_parent/wrap_content then measure it
             // with the maximum visible height
 
@@ -56,7 +64,9 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
                     if (ViewCompat.getFitsSystemWindows(header)) {
                         final WindowInsetsCompat parentInsets = parent.getLastWindowInsets();
                         if (parentInsets != null) {
-                            availableHeight += parentInsets.getSystemWindowInsetTop() + parentInsets.getSystemWindowInsetBottom();
+                            availableHeight +=
+                                    parentInsets.getSystemWindowInsetTop()
+                                            + parentInsets.getSystemWindowInsetBottom();
                         }
                     }
                 } else {
@@ -71,7 +81,12 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
                 } else {
                     height -= headerHeight;
                 }
-                final int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(height, childLpHeight == ViewGroup.LayoutParams.MATCH_PARENT ? View.MeasureSpec.EXACTLY : View.MeasureSpec.AT_MOST);
+                final int heightMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                height,
+                                childLpHeight == ViewGroup.LayoutParams.MATCH_PARENT
+                                        ? View.MeasureSpec.EXACTLY
+                                        : View.MeasureSpec.AT_MOST);
 
                 /*/
                 Dog.INSTANCE.d(TAG, "onMeasureChild:"
@@ -82,7 +97,8 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
                 );
                 */
                 // Now measure the scrolling view with the correct height
-                parent.onMeasureChild(child, parentWidthMeasureSpec, widthUsed, heightMeasureSpec, heightUsed);
+                parent.onMeasureChild(
+                        child, parentWidthMeasureSpec, widthUsed, heightMeasureSpec, heightUsed);
 
                 return true;
             }
@@ -91,21 +107,29 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
     }
 
     @Override
-    protected void layoutChild(@NonNull final CoordinatorLayout parent, @NonNull final View child, final int layoutDirection) {
+    protected void layoutChild(
+            @NonNull final CoordinatorLayout parent,
+            @NonNull final View child,
+            final int layoutDirection) {
         final List<View> dependencies = parent.getDependencies(child);
         final View header = dependsOnHelper.findLayoutDependency(dependencies);
 
         if (header != null) {
-            final CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
+            final CoordinatorLayout.LayoutParams lp =
+                    (CoordinatorLayout.LayoutParams) child.getLayoutParams();
             final Rect available = tempRect1;
             available.set(
                     parent.getPaddingLeft() + lp.leftMargin,
                     header.getBottom() + lp.topMargin,
                     parent.getWidth() - parent.getPaddingRight() - lp.rightMargin,
-                    parent.getHeight() + header.getBottom() - parent.getPaddingBottom() - lp.bottomMargin
-            );
+                    parent.getHeight()
+                            + header.getBottom()
+                            - parent.getPaddingBottom()
+                            - lp.bottomMargin);
             final WindowInsetsCompat parentInsets = parent.getLastWindowInsets();
-            if (parentInsets != null && ViewCompat.getFitsSystemWindows(parent) && !ViewCompat.getFitsSystemWindows(child)) {
+            if (parentInsets != null
+                    && ViewCompat.getFitsSystemWindows(parent)
+                    && !ViewCompat.getFitsSystemWindows(child)) {
                 // If we're set to handle insets but this child isn't, then it has been measured as
                 // if there are no insets. We need to lay it out to match horizontally.
                 // Top and bottom and already handled in the logic above
@@ -114,7 +138,13 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
             }
 
             final Rect out = tempRect2;
-            GravityCompat.apply(resolveGravity(lp.gravity), child.getMeasuredWidth(), child.getMeasuredHeight(), available, out, layoutDirection);
+            GravityCompat.apply(
+                    resolveGravity(lp.gravity),
+                    child.getMeasuredWidth(),
+                    child.getMeasuredHeight(),
+                    available,
+                    out,
+                    layoutDirection);
 
             final int overlap = getOverlapPixelsForOffset(header);
 
@@ -136,7 +166,10 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
     }
 
     final int getOverlapPixelsForOffset(final View header) {
-        return overlayTop == 0 ? 0 : MathUtils.clamp((int) (getOverlapRatioForOffset(header) * overlayTop), 0, overlayTop);
+        return overlayTop == 0
+                ? 0
+                : MathUtils.clamp(
+                (int) (getOverlapRatioForOffset(header) * overlayTop), 0, overlayTop);
     }
 
     float getOverlapRatioForOffset(final View header) {
@@ -148,14 +181,30 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
     }
 
     @Override
-    public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        return (axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0 && coordinatorLayout.getHeight() - directTargetChild.getMeasuredHeight() <= child.getHeight();
+    public boolean onStartNestedScroll(
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull View child,
+            @NonNull View directTargetChild,
+            @NonNull View target,
+            int axes,
+            int type) {
+        return (axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0
+                && coordinatorLayout.getHeight() - directTargetChild.getMeasuredHeight()
+                <= child.getHeight();
     }
 
     @Override
-    public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
+    public void onNestedPreScroll(
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull View child,
+            @NonNull View target,
+            int dx,
+            int dy,
+            @NonNull int[] consumed,
+            int type) {
         if (dy == 0) return;
-        View anchor = dependsOnHelper.findLayoutDependency(coordinatorLayout.getDependencies(child));
+        View anchor =
+                dependsOnHelper.findLayoutDependency(coordinatorLayout.getDependencies(child));
         if (anchor == null) return;
         int anchorBottom = anchor.getBottom();
         int anchorHeight = anchor.getHeight();
@@ -194,9 +243,19 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
     }
 
     @Override
-    public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, @NonNull int[] consumed) {
+    public void onNestedScroll(
+            @NonNull CoordinatorLayout coordinatorLayout,
+            @NonNull View child,
+            @NonNull View target,
+            int dxConsumed,
+            int dyConsumed,
+            int dxUnconsumed,
+            int dyUnconsumed,
+            int type,
+            @NonNull int[] consumed) {
         if (dyUnconsumed == 0) return;
-        View anchor = dependsOnHelper.findLayoutDependency(coordinatorLayout.getDependencies(child));
+        View anchor =
+                dependsOnHelper.findLayoutDependency(coordinatorLayout.getDependencies(child));
         if (anchor == null) return;
         int anchorBottom = anchor.getBottom();
         int anchorHeight = anchor.getHeight();

@@ -17,9 +17,8 @@ class LoginCallAdapterFactory(
     override fun get(
         returnType: Type,
         annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
-
         annotations.forEach {
             if (it is NeteaseLogin) {
                 val delegate: CallAdapter<*, *> =

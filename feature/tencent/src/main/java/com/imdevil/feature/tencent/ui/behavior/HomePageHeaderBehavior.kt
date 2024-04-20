@@ -8,5 +8,4 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 class HomePageHeaderBehavior(
     private val context: Context,
     private val attrs: AttributeSet,
-) : CoordinatorLayout.Behavior<View>(context, attrs) {
-}
+) : CoordinatorLayout.Behavior<View>(context, attrs)

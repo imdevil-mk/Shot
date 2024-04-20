@@ -24,10 +24,9 @@ class MoshiApiResponseTypeAdapterFactory : JsonAdapter.Factory {
 
 class ApiResponseTypeAdapter(
     private val outerType: Type,
-    private val dataTypeAdapter: JsonAdapter<Any>
+    private val dataTypeAdapter: JsonAdapter<Any>,
 ) : JsonAdapter<ApiResponse<Any>>() {
     override fun fromJson(reader: JsonReader): ApiResponse<Any> {
-
         var code: Int? = null
         var msg: String? = null
         var data: Any? = null
@@ -57,7 +56,7 @@ class ApiResponseTypeAdapter(
                 code ?: -1,
                 msg ?: "N/A",
             )
-        } else if (data != null){
+        } else if (data != null) {
             ApiResponse.Success(data)
         } else {
             ApiResponse.OtherError(IllegalStateException())

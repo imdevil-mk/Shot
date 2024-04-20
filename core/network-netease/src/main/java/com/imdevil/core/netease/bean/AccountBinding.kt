@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -23,5 +22,5 @@ data class AccountBinding(
     @Json(name = "id")
     val id: Long?,
     @Json(name = "type")
-    val type: Int?
+    val type: Int?,
 )

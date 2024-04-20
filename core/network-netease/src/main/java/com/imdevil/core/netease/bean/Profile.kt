@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -95,7 +94,7 @@ data class Profile(
     @Json(name = "avatarDetail")
     val avatarDetail: Any?,
     @Json(name = "playlistCount")
-    val playlistCount: Int?
+    val playlistCount: Int?,
 ) {
     @JsonClass(generateAdapter = true)
     class Experts

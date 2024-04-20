@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 fun Fragment.safeCollect(
     state: Lifecycle.State = Lifecycle.State.STARTED,
-    block: suspend CoroutineScope.() -> Unit
+    block: suspend CoroutineScope.() -> Unit,
 ) {
     viewLifecycleOwner.lifecycleScope.launch {
         repeatOnLifecycle(state) {

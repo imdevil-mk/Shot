@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.response
 
-
 import com.imdevil.core.netease.bean.PlaylistDetail
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -24,7 +23,7 @@ data class PlaylistDetailResponse(
     val songFromUsers: Any?,
     @Json(name = "urls")
     val urls: Any?,
-    */
+     */
 
     @Json(name = "playlist")
     val detail: PlaylistDetail,

@@ -10,7 +10,7 @@ import java.lang.reflect.Type
 
 class PlaylistBriefListAdapter(
     private val moshi: Moshi,
-    private val delegate: JsonAdapter<List<PlaylistBrief>>
+    private val delegate: JsonAdapter<List<PlaylistBrief>>,
 ) : JsonAdapter<List<PlaylistBrief>>() {
 
     private val options: JsonReader.Options = JsonReader.Options.of("disslist")
@@ -76,7 +76,7 @@ class PlaylistBriefListAdapter(
                 override fun create(
                     type: Type,
                     annotations: MutableSet<out Annotation>,
-                    moshi: Moshi
+                    moshi: Moshi,
                 ): JsonAdapter<*>? {
                     if (annotations.isNotEmpty()) return null
                     if (type !is ParameterizedType) return null

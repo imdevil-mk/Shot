@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -37,5 +36,5 @@ data class Account(
     @Json(name = "status")
     val status: Int?,
     @Json(name = "uninitialized")
-    val uninitialized: Boolean?
+    val uninitialized: Boolean?,
 )

@@ -9,7 +9,7 @@ import com.imdevil.core.common.ShotDispatchers.IO
 import com.imdevil.core.common.di.ApplicationScope
 import com.imdevil.shot.core.datastore.TencentUserProfile
 import com.imdevil.shot.core.datastore.UserPreferences
-import com.imdevil.shot.datastore.preference.UserPreferencesSerializer
+import com.imdevil.shot.datastore.preference.UserPreferenceSerializer
 import com.imdevil.shot.datastore.user.TencentUserProfileSerializer
 import dagger.Module
 import dagger.Provides
@@ -29,10 +29,10 @@ object DataStoreModule {
         @ApplicationContext context: Context,
         @Dispatcher(IO) ioDispatcher: CoroutineDispatcher,
         @ApplicationScope scope: CoroutineScope,
-        userPreferencesSerializer: UserPreferencesSerializer,
+        userPreferenceSerializer: UserPreferenceSerializer,
     ): DataStore<UserPreferences> =
         DataStoreFactory.create(
-            serializer = userPreferencesSerializer,
+            serializer = userPreferenceSerializer,
             scope = CoroutineScope(scope.coroutineContext + ioDispatcher),
         ) {
             context.dataStoreFile("user_preferences.pb")

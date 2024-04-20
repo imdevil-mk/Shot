@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * An [androidx.datastore.core.Serializer] for the [UserPreferences] proto.
  */
-class UserPreferencesSerializer @Inject constructor() : Serializer<UserPreferences> {
+class UserPreferenceSerializer @Inject constructor() : Serializer<UserPreferences> {
     override val defaultValue: UserPreferences = UserPreferences.getDefaultInstance()
 
     override suspend fun readFrom(input: InputStream): UserPreferences =

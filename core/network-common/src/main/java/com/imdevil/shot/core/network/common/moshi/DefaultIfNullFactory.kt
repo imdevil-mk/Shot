@@ -13,11 +13,12 @@ annotation class DefaultIfNull
 
 class DefaultIfNullFactory : JsonAdapter.Factory {
     override fun create(
-        type: Type, annotations: MutableSet<out Annotation>,
-        moshi: Moshi
+        type: Type,
+        annotations: MutableSet<out Annotation>,
+        moshi: Moshi,
     ): JsonAdapter<*>? {
         if (!Types.getRawType(type).isAnnotationPresent(
-                DefaultIfNull::class.java
+                DefaultIfNull::class.java,
             )
         ) {
             return null

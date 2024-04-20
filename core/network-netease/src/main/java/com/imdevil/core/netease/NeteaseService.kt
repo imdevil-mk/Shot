@@ -22,7 +22,7 @@ interface NeteaseService {
     suspend fun logWithEmail(
         @Query("username") id: String,
         @Query("password") pwd: String,
-        @Query("rememberLogin") remember: Boolean
+        @Query("rememberLogin") remember: Boolean,
     ): ApiResponse<LoginResponse>
 
     @GET("/weapi/w/nuser/account/get")
@@ -56,7 +56,7 @@ interface NeteaseService {
     @GET("interface3.music.163.com/eapi/song/enhance/player/url")
     suspend fun getSongPlayInfo(
         @Query("ids") id: String,
-        @Query("br") br: Int = 999000
+        @Query("br") br: Int = 999000,
     ): ApiResponse<SongPlayedBatchResponse>
 
     @GET("/api/nuser/account/get")

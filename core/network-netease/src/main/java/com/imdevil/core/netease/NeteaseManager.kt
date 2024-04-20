@@ -23,11 +23,10 @@ class NeteaseManager private constructor(
     private val service: NeteaseService,
 ) : NeteaseService by service {
 
-
     override suspend fun logWithEmail(
         id: String,
         pwd: String,
-        remember: Boolean
+        remember: Boolean,
     ): ApiResponse<LoginResponse> {
         return service.logWithEmail(id, SecureUtil.md5(pwd), remember)
     }
@@ -39,9 +38,11 @@ class NeteaseManager private constructor(
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(HostInterceptor())
                 .addInterceptor(NeteaseInterceptor(cookieManager))
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
+                .addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    },
+                )
                 .build()
 
             val moshi = Moshi.Builder()

@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.response
 
-
 import com.imdevil.core.netease.bean.Privilege
 import com.imdevil.core.netease.bean.Song
 import com.squareup.moshi.Json
@@ -13,5 +12,5 @@ data class SongDetailBatchResponse(
     @Json(name = "privileges")
     val privileges: List<Privilege>,
     @Json(name = "songs")
-    val songs: List<Song>
+    val songs: List<Song>,
 )

@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -11,10 +10,10 @@ data class TrialPrivilege(
     val cannotListenReason: Any?,
     @Json(name = "listenType")
     val listenType: Any?,
-    */
+     */
 
     @Json(name = "resConsumable")
     val resConsumable: Boolean,
     @Json(name = "userConsumable")
-    val userConsumable: Boolean
+    val userConsumable: Boolean,
 )

@@ -21,6 +21,6 @@ interface TencentRepository {
     ): ResponseBody
 
     suspend fun getSongDetail(
-        mid: String
+        mid: String,
     ): ResponseBody
 }

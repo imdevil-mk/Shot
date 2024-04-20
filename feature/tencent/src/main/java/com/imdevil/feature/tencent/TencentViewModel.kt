@@ -27,7 +27,7 @@ class TencentViewModel @Inject constructor(
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
-            emptyList()
+            emptyList(),
         )
 
     suspend fun getUserInfo(

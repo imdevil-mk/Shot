@@ -43,6 +43,7 @@ inline fun <reified T> Resource<T>.updateOnSuccess(liveData: MutableLiveData<T>)
         liveData.value = data
     }
 }
+
 /**
  * Updates value of [MutableStateFlow] if [Resource] is of type [Success]
  */

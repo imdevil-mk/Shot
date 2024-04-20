@@ -14,13 +14,13 @@ const val LOCAL_FRAGMENT_INDEX = 2
 
 class MainViewPagerAdapter(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         TENCENT_FRAGMENT_INDEX to { TencentFragment() },
         NETEASE_FRAGMENT_INDEX to { NeteaseFragment() },
-        LOCAL_FRAGMENT_INDEX to { LocalFragment() }
+        LOCAL_FRAGMENT_INDEX to { LocalFragment() },
     )
 
     override fun getItemCount() = tabFragmentsCreators.size

@@ -13,8 +13,8 @@ class DemoListAdapter : ListAdapter<DemoData, DemoHolder>(DemoDataDiffCallBack()
             DemoListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
 
     override fun onBindViewHolder(holder: DemoHolder, position: Int) {

@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.response
 
-
 import com.imdevil.core.netease.bean.Account
 import com.imdevil.core.netease.bean.AccountBinding
 import com.imdevil.core.netease.bean.Profile
@@ -18,5 +17,5 @@ data class LoginResponse(
     @Json(name = "profile")
     val profile: Profile,
     @Json(name = "bindings")
-    val bindings: List<AccountBinding>?
+    val bindings: List<AccountBinding>?,
 )

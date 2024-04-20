@@ -9,7 +9,7 @@ import java.lang.reflect.Type
 
 class PlaylistAdapter(
     private val moshi: Moshi,
-    private val delegate: JsonAdapter<Playlist>
+    private val delegate: JsonAdapter<Playlist>,
 ) : JsonAdapter<Playlist>() {
 
     private val options: JsonReader.Options = JsonReader.Options.of("cdlist")
@@ -49,7 +49,7 @@ class PlaylistAdapter(
                 override fun create(
                     type: Type,
                     annotations: MutableSet<out Annotation>,
-                    moshi: Moshi
+                    moshi: Moshi,
                 ): JsonAdapter<*>? {
                     if (annotations.isNotEmpty()) return null
                     if (type != Playlist::class.java) return null

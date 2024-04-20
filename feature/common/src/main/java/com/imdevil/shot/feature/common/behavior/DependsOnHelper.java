@@ -23,21 +23,24 @@ public class DependsOnHelper {
     public DependsOnHelper(Context context, AttributeSet attrs) {
         final TypedArray a =
                 context.obtainStyledAttributes(attrs, R.styleable.CustomViewAttributes);
-        mLayoutDepends = a.getResourceId(R.styleable.CustomViewAttributes_layout_depends, INVALID_ID);
-        mMeasureDepends = a.getResourceId(R.styleable.CustomViewAttributes_measure_depends, INVALID_ID);
-        mScrollDepends = a.getResourceId(R.styleable.CustomViewAttributes_scroll_depends, INVALID_ID);
+        mLayoutDepends =
+                a.getResourceId(R.styleable.CustomViewAttributes_layout_depends, INVALID_ID);
+        mMeasureDepends =
+                a.getResourceId(R.styleable.CustomViewAttributes_measure_depends, INVALID_ID);
+        mScrollDepends =
+                a.getResourceId(R.styleable.CustomViewAttributes_scroll_depends, INVALID_ID);
         a.recycle();
     }
 
-    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child,
-                                   @NonNull View dependency) {
+    public boolean layoutDependsOn(
+            @NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
         return dependency.getId() == mLayoutDepends
                 || dependency.getId() == mMeasureDepends
                 || dependency.getId() == mScrollDepends;
     }
 
-    public boolean matchScrollDependency(@NonNull CoordinatorLayout parent, @NonNull View child,
-                                         @NonNull View dependency) {
+    public boolean matchScrollDependency(
+            @NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
         return dependency.getId() == mScrollDepends;
     }
 

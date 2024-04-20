@@ -36,13 +36,16 @@ class TencentFragment : BaseFragment<FragmentTencentBinding>() {
     )
 
     private val tabTexts = listOf(
-        "首页", "广场", "我的", "关注"
+        "首页",
+        "广场",
+        "我的",
+        "关注",
     )
 
     override fun onCreateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = FragmentTencentBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,10 +59,10 @@ class TencentFragment : BaseFragment<FragmentTencentBinding>() {
         }*/
 
         lifecycleScope.launch {
-            //viewModel.getUserInfo("516959708")
-            //viewModel.getPlaylistBriefByUser("516959708")
-            //viewModel.getPlaylist("516959708", "7809078062")
-            //viewModel.getSongDetail("002OKIox28ad9a")
+            // viewModel.getUserInfo("516959708")
+            // viewModel.getPlaylistBriefByUser("516959708")
+            // viewModel.getPlaylist("516959708", "7809078062")
+            // viewModel.getSongDetail("002OKIox28ad9a")
         }
 
         binding.pager.adapter =

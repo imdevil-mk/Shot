@@ -32,7 +32,7 @@ class AddCookiesFragment : BaseFragment<FragmentAddCookiesBinding>() {
     override fun onCreateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = FragmentAddCookiesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,16 +58,16 @@ class AddCookiesFragment : BaseFragment<FragmentAddCookiesBinding>() {
                     .setTitle(R.string.add_cookies)
                     .setView(R.layout.dialog_add_cookie)
                     .setPositiveButton(
-                        R.string.action_save
+                        R.string.action_save,
                     ) { dialog, _ ->
                         val input =
                             (dialog as AlertDialog).findViewById<TextView>(R.id.input)!!.text.toString()
                         saveCookie(input)
                     }
                     .setNegativeButton(
-                        R.string.action_cancel
+                        R.string.action_cancel,
                     ) { _, _ ->
-                        //no-op
+                        // no-op
                     }
                     .show()
             }

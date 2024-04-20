@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -45,7 +44,7 @@ data class Privilege(
     val subp: Int,
     @Json(name = "toast")
     val toast: Boolean,
-    */
+     */
 
     @Json(name = "id")
     val id: Int,

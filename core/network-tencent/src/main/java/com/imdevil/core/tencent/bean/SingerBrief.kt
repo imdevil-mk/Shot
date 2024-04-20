@@ -1,6 +1,5 @@
 package com.imdevil.core.tencent.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

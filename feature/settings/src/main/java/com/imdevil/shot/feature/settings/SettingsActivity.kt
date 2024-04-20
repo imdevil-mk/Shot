@@ -39,7 +39,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>() {
 
         val appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(),
-            fallbackOnNavigateUpListener = ::onSupportNavigateUp
+            fallbackOnNavigateUpListener = ::onSupportNavigateUp,
         )
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 

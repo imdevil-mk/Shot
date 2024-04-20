@@ -1,6 +1,5 @@
 package com.imdevil.shot.feature.common.behavior;
 
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -153,7 +152,6 @@ public abstract class HeaderBehavior<V extends View> extends ViewOffsetBehavior<
         final int curOffset = getTopAndBottomOffset();
         int consumed = 0;
 
-
         if (minOffset != 0 && curOffset >= minOffset && curOffset <= maxOffset) {
             // If we have some scrolling range, and we're currently within the min and max
             // offsets, calculate a new offset
@@ -241,9 +239,7 @@ public abstract class HeaderBehavior<V extends View> extends ViewOffsetBehavior<
         return false;
     }
 
-    /**
-     * Returns the maximum px offset when {@code view} is being dragged.
-     */
+    /** Returns the maximum px offset when {@code view} is being dragged. */
     protected int getMaxDragOffset(@NonNull V view) {
         return -view.getHeight();
     }

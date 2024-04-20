@@ -22,7 +22,7 @@ class MainViewPagerFragment : BaseFragment<FragmentMainViewPagerBinding>() {
     override fun onCreateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) = FragmentMainViewPagerBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

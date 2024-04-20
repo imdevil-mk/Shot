@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.imdevil.shot.core.network.common.moshi.DefaultIfNull
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

@@ -14,8 +14,8 @@ class CookieListAdapter : ListAdapter<Cookie, CookieHolder>(CookieDiffCallback()
             ListItemCookieBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
@@ -44,11 +44,10 @@ class CookieDiffCallback : DiffUtil.ItemCallback<Cookie>() {
     }
 
     override fun areContentsTheSame(oldItem: Cookie, newItem: Cookie): Boolean {
-        return oldItem.name == newItem.name
-                && oldItem.value == newItem.value
-                && oldItem.domain == newItem.domain
-                && oldItem.path == newItem.path
-                && oldItem.expirationDate == newItem.expirationDate
+        return oldItem.name == newItem.name &&
+                oldItem.value == newItem.value &&
+                oldItem.domain == newItem.domain &&
+                oldItem.path == newItem.path &&
+                oldItem.expirationDate == newItem.expirationDate
     }
-
 }

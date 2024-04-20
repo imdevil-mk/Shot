@@ -4,7 +4,6 @@ import cn.hutool.core.text.StrBuilder
 import java.math.BigInteger
 import java.security.MessageDigest
 
-
 fun Map<String, String>.toBody(): String {
     val str = StrBuilder("[")
     keys.forEachIndexed { index, name ->
@@ -20,7 +19,6 @@ fun Map<String, String>.toBody(): String {
     str.append("]")
     return str.toString()
 }
-
 
 fun Map<String, String>.print(tag: String) {
     println(tag)

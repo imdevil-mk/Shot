@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -33,7 +32,7 @@ data class SongPlayable(
     val uf: Any?,
     @Json(name = "urlSource")
     val urlSource: Int,
-    */
+     */
 
     @Json(name = "id")
     val id: Int,

@@ -41,13 +41,12 @@ class NeteaseInterceptor(
     private val cookieManager: ICookie,
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-
         val originRequest = chain.request()
 
         val headers = mutableMapOf(
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.30 Safari/537.36",
             "Content-Type" to "application/x-www-form-urlencoded",
-            "Referer" to "https://music.163.com"
+            "Referer" to "https://music.163.com",
         )
 
         if (cookieManager.hasCookies()) {
@@ -76,8 +75,10 @@ class NeteaseInterceptor(
         }
         paramsMap.print("origin params")
 
-        val result = when (chain.request().getInterestedAnnotation<NeteaseCrypto>()?.type
-            ?: CryptoType.WEAPI) {
+        val result = when (
+            chain.request().getInterestedAnnotation<NeteaseCrypto>()?.type
+                ?: CryptoType.WEAPI
+        ) {
             CryptoType.WEAPI -> {
                 paramsMap["csrf_token"] = cookieManager.get(CSRF) ?: ""
                 paramsMap.print("we_api params")
@@ -97,7 +98,7 @@ class NeteaseInterceptor(
                     CHANNEL to (cookieManager.get(CHANNEL) ?: ""),
                     REQUEST_ID to "${LocalDateTime.now()}_${
                         floor(Math.random() * 1000).toString().padStart(4, '0')
-                    }"
+                    }",
                 )
                 if (cookieManager.hasCookie(MUSIC_U)) {
                     cryptoHeader[MUSIC_U] = cookieManager.get(MUSIC_U) ?: ""
@@ -114,7 +115,7 @@ class NeteaseInterceptor(
 
                 Crypto.eApi(
                     originRequest.url.encodedPath.replace("/eapi", "/api"),
-                    jsonObject.toString()
+                    jsonObject.toString(),
                 )
             }
         }

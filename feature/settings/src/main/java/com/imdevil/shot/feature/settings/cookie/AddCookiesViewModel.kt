@@ -25,7 +25,7 @@ class AddCookiesViewModel @Inject constructor(
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
-            emptyList()
+            emptyList(),
         )
 
     fun setUserCookies(cookies: List<Cookie>) {

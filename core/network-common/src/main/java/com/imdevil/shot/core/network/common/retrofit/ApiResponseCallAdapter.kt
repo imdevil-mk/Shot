@@ -16,7 +16,7 @@ class ApiResponseCallAdapterFactory : CallAdapter.Factory() {
     override fun get(
         returnType: Type,
         annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         val rawReturnType = getRawType(returnType)
         if (rawReturnType != Call::class.java) return null
@@ -40,25 +40,25 @@ class ApiResponseCallAdapter<T>(
 }
 
 class ApiResponseCall<T>(
-    private val delegate: Call<ApiResponse<T>>
+    private val delegate: Call<ApiResponse<T>>,
 ) : Call<ApiResponse<T>> {
     override fun enqueue(callback: Callback<ApiResponse<T>>) =
         delegate.enqueue(object : Callback<ApiResponse<T>> {
             override fun onResponse(
                 call: Call<ApiResponse<T>>,
-                response: Response<ApiResponse<T>>
+                response: Response<ApiResponse<T>>,
             ) {
                 if (response.isSuccessful) {
                     val body = response.body()!!
                     callback.onResponse(
                         this@ApiResponseCall,
-                        Response.success(body)
+                        Response.success(body),
                     )
                 } else {
                     val throwable = HttpException(response)
                     callback.onResponse(
                         this@ApiResponseCall,
-                        Response.success(ApiResponse.OtherError(throwable))
+                        Response.success(ApiResponse.OtherError(throwable)),
                     )
                 }
             }
@@ -66,7 +66,7 @@ class ApiResponseCall<T>(
             override fun onFailure(call: Call<ApiResponse<T>>, t: Throwable) {
                 callback.onResponse(
                     this@ApiResponseCall,
-                    Response.success(ApiResponse.OtherError(t))
+                    Response.success(ApiResponse.OtherError(t)),
                 )
             }
         })

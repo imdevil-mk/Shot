@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -85,7 +84,7 @@ data class PlaylistDetail(
     val videoIds: Any?,
     @Json(name = "videos")
     val videos: Any?,
-    */
+     */
 
     @Json(name = "id")
     val id: String,
@@ -106,5 +105,5 @@ data class PlaylistDetail(
     @Json(name = "tracks")
     val tracks: List<Song>,
     @Json(name = "privileges")
-    val privileges: List<Privilege>
+    val privileges: List<Privilege>,
 )

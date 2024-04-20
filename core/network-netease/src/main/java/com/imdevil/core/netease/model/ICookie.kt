@@ -56,7 +56,6 @@ val INTERESTED_COOKIES = listOf(
     MUSIC_A,
 )
 
-
 fun Map<String, String>.toEncodeString(): String {
     val str = StrBuilder()
     keys.forEachIndexed { index, name ->

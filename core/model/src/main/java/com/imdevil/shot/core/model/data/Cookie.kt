@@ -30,6 +30,6 @@ data class Cookie(
     val storeId: String? = "",
 ) {
     override fun toString(): String {
-        return "${name}=${value} Domain=${domain} Path=${path} Expires=${expirationDate}"
+        return "$name=$value Domain=$domain Path=$path Expires=$expirationDate"
     }
 }

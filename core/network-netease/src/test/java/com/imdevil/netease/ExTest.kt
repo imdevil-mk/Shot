@@ -20,7 +20,6 @@ fun getFileOrCreate(name: String): File {
 
 fun getJson(name: String) = getRes(name).readText()
 
-
 fun <T> ApiResponse<T>.log(action: T.() -> Unit) {
     when (this) {
         is ApiResponse.BizError -> println(this.msg)

@@ -11,7 +11,7 @@ import java.lang.reflect.Type
 
 class ApiResponseAdapter<T>(
     private val moshi: Moshi,
-    private val delegate: JsonAdapter<T>
+    private val delegate: JsonAdapter<T>,
 ) : JsonAdapter<ApiResponse<T>>() {
 
     private val stringAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
@@ -46,7 +46,6 @@ class ApiResponseAdapter<T>(
     }
 
     override fun toJson(writer: JsonWriter, value: ApiResponse<T>?) {
-
     }
 
     companion object {
@@ -55,7 +54,7 @@ class ApiResponseAdapter<T>(
                 override fun create(
                     type: Type,
                     annotations: MutableSet<out Annotation>,
-                    moshi: Moshi
+                    moshi: Moshi,
                 ): JsonAdapter<*>? {
                     if (annotations.isNotEmpty()) return null
                     if (type !is ParameterizedType) return null

@@ -15,7 +15,7 @@ class HomePageTabLayoutBehavior(
     override fun layoutDependsOn(
         parent: CoordinatorLayout,
         child: View,
-        dependency: View
+        dependency: View,
     ): Boolean {
         return dependsOnHelper.layoutDependsOn(parent, child, dependency)
     }
@@ -23,7 +23,7 @@ class HomePageTabLayoutBehavior(
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: View,
-        dependency: View
+        dependency: View,
     ): Boolean {
         if (dependsOnHelper.matchScrollDependency(parent, child, dependency)) {
             offsetChildAsNeeded(child, dependency)

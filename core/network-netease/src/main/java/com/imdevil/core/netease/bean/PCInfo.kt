@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.bean
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -45,5 +44,5 @@ data class PCInfo(
     @Json(name = "userId")
     val userId: Int,
     @Json(name = "version")
-    val version: Int
+    val version: Int,
 )

@@ -8,7 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-
 interface TencentApi {
 
     /**
@@ -23,7 +22,7 @@ interface TencentApi {
         @Query("hostuin") hostuin: String,
         @Query("loginUin") loginUin: String,
         @Query("hostUin") hostUin: String = "0",
-        */
+         */
         @Query("cv") cv: Int = 4747474,
         @Query("ct") ct: Int = 24,
         @Query("reqtype") reqtype: Int = 0,

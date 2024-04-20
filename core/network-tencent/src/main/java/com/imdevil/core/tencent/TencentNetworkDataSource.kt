@@ -21,6 +21,6 @@ interface TencentNetworkDataSource {
     ): ResponseBody
 
     suspend fun getSongDetail(
-        mid: String
+        mid: String,
     ): ResponseBody
 }

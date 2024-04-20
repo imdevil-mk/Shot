@@ -2,7 +2,7 @@ package com.imdevil.shot.core.network.common.model
 
 sealed class ApiResponse<T> {
     data class Success<T>(
-        val data: T
+        val data: T,
     ) : ApiResponse<T>()
 
     data class BizError<T>(
@@ -11,6 +11,6 @@ sealed class ApiResponse<T> {
     ) : ApiResponse<T>()
 
     data class OtherError<T>(
-        val throwable: Throwable
+        val throwable: Throwable,
     ) : ApiResponse<T>()
 }

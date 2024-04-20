@@ -1,6 +1,5 @@
 package com.imdevil.shot.feature.common.behavior;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
@@ -32,8 +31,7 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior<Vie
     private int verticalLayoutGap = 0;
     private int overlayTop;
 
-    public HeaderScrollingViewBehavior() {
-    }
+    public HeaderScrollingViewBehavior() {}
 
     public HeaderScrollingViewBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -66,8 +64,9 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior<Vie
                     if (ViewCompat.getFitsSystemWindows(measureHeader)) {
                         final WindowInsetsCompat parentInsets = parent.getLastWindowInsets();
                         if (parentInsets != null) {
-                            availableHeight += parentInsets.getSystemWindowInsetTop()
-                                    + parentInsets.getSystemWindowInsetBottom();
+                            availableHeight +=
+                                    parentInsets.getSystemWindowInsetTop()
+                                            + parentInsets.getSystemWindowInsetBottom();
                         }
                     }
                 } else {
@@ -93,11 +92,13 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior<Vie
         return false;
     }
 
-    private int calculateHeaderHeightRecursively(@NonNull CoordinatorLayout parent, @Nullable View header, int height) {
+    private int calculateHeaderHeightRecursively(
+            @NonNull CoordinatorLayout parent, @Nullable View header, int height) {
         if (header == null) return 0;
 
         int headerHeight = header.getMeasuredHeight();
-        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) header.getLayoutParams();
+        CoordinatorLayout.LayoutParams lp =
+                (CoordinatorLayout.LayoutParams) header.getLayoutParams();
         Behavior behavior = lp.getBehavior();
         if (behavior instanceof ViewOffsetBehavior) {
             ViewOffsetBehavior vb = (ViewOffsetBehavior) behavior;
@@ -124,7 +125,10 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior<Vie
                     parent.getPaddingLeft() + lp.leftMargin,
                     header.getBottom() + lp.topMargin,
                     parent.getWidth() - parent.getPaddingRight() - lp.rightMargin,
-                    parent.getHeight() + header.getBottom() - parent.getPaddingBottom() - lp.bottomMargin);
+                    parent.getHeight()
+                            + header.getBottom()
+                            - parent.getPaddingBottom()
+                            - lp.bottomMargin);
 
             final WindowInsetsCompat parentInsets = parent.getLastWindowInsets();
             if (parentInsets != null
@@ -168,7 +172,8 @@ public abstract class HeaderScrollingViewBehavior extends ViewOffsetBehavior<Vie
     final int getOverlapPixelsForOffset(final View header) {
         return overlayTop == 0
                 ? 0
-                : MathUtils.clamp((int) (getOverlapRatioForOffset(header) * overlayTop), 0, overlayTop);
+                : MathUtils.clamp(
+                (int) (getOverlapRatioForOffset(header) * overlayTop), 0, overlayTop);
     }
 
     private static int resolveGravity(int gravity) {

@@ -1,6 +1,5 @@
 package com.imdevil.core.netease.crypto
 
-
 import cn.hutool.core.codec.Base64
 import cn.hutool.core.util.HexUtil
 import cn.hutool.core.util.RandomUtil
@@ -13,10 +12,9 @@ import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import kotlin.math.abs
 
-
 object Crypto {
-    private const val eApiKey = "e82ckenh8dichen8"
-    private const val linuxApiKey = "rFgB&h#%2?^eDg:Q"
+    private const val E_API_KEY = "e82ckenh8dichen8"
+    private const val LINUX_API_KEY = "rFgB&h#%2?^eDg:Q"
     private val iv = "0102030405060708".toByteArray()
 
     private fun aesEncrypt(value: String, key: ByteArray): ByteArray {
@@ -53,21 +51,34 @@ object Crypto {
     @Deprecated("Please use EApi(Recommended)/WeApi.")
     fun linuxApi(param: String): List<Pair<String, String>> {
         return listOf(
-            "eparams" to String(HexUtil.encodeHex(aesEncrypt(param, linuxApiKey.toByteArray()))).uppercase()
+            "eparams" to String(
+                HexUtil.encodeHex(
+                    aesEncrypt(
+                        param,
+                        LINUX_API_KEY.toByteArray()
+                    )
+                )
+            ).uppercase(),
         )
     }
-
 
     fun eApi(url: String, param: String): Map<String, String> {
         val message = "nobody${url}use${param}md5forencrypt"
         val digest = String(HexUtil.encodeHex(MessageDigest.getInstance("MD5").digest(message.toByteArray())))
-        val data = "${url}-36cd479b6b5-${param}-36cd479b6b5-${digest}"
+        val data = "$url-36cd479b6b5-$param-36cd479b6b5-$digest"
         return mapOf(
-            "params" to String(HexUtil.encodeHex(aesEncrypt(data, eApiKey.toByteArray()))).uppercase()
+            "params" to String(
+                HexUtil.encodeHex(
+                    aesEncrypt(
+                        data,
+                        E_API_KEY.toByteArray()
+                    )
+                )
+            ).uppercase(),
         )
     }
 
-    fun weApi(param: String): Map<String,String> {
+    fun weApi(param: String): Map<String, String> {
         println("weApi crypto --> $param")
         val base62 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         val presentKey = "0CoJUm6Qyw8W8jud".toByteArray()
@@ -75,10 +86,9 @@ object Crypto {
         // Generated from Key.pem: "-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7clFSs6sXqHauqKWqdtLkF2KexO40H1YTX8z2lSgBBOAxLsvaklV8k4cBFK9snQXE9/DDaFt6Rr7iVZMldczhC0JNgTz+SHXT6CBHuX3e9SdB1Ua44oncaTWz7OBGLbCiK45wIDAQAB\n-----END PUBLIC KEY-----"
         val modulus = BigInteger(
             "00E0B509F6259DF8642DBC35662901477DF22677EC152B5FF68ACE615BB7B725152B3AB17A876AEA8A5AA76D2E417629EC4EE341F56135FCCF695280104E0312ECBDA92557C93870114AF6C9D05C4F7F0C3685B7A46BEE255932575CCE10B424D813CFE4875D3E82047B97DDEF52741D546B8E289DC6935B3ECE0462DB0A22B8E7",
-            16
+            16,
         )
         val pubExp = BigInteger("010001", 16)
-
 
         val secretKey = ByteArray(16)
         RandomUtil.randomBytes(16).forEachIndexed { index, byte ->
@@ -88,11 +98,20 @@ object Crypto {
             "params" to Base64.encode(
                 aesEncrypt(
                     Base64.encode(
-                        aesEncrypt(param, presentKey, iv)
-                    ), secretKey, iv
+                        aesEncrypt(param, presentKey, iv),
+                    ),
+                    secretKey, iv,
+                ),
+            ),
+            "encSecKey" to String(
+                HexUtil.encodeHex(
+                    rsaEncrypt(
+                        String(secretKey).reversed(),
+                        modulus,
+                        pubExp
+                    )
                 )
             ),
-            "encSecKey" to String(HexUtil.encodeHex(rsaEncrypt(String(secretKey).reversed(), modulus, pubExp)))
         )
     }
 }

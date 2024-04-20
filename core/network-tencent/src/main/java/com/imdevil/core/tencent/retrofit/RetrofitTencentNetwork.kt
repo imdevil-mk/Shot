@@ -23,7 +23,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RetrofitTencentNetwork @Inject constructor(
-    private val cookieManager: ICookie
+    private val cookieManager: ICookie,
 ) : TencentNetworkDataSource {
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
@@ -55,7 +55,7 @@ class RetrofitTencentNetwork @Inject constructor(
 
     override suspend fun getPlaylistBriefByUser(
         uin: String,
-        size: Int
+        size: Int,
     ): ApiResponse<List<PlaylistBrief>> {
         return api.getPlaylistBriefByUser(uin, size)
     }

@@ -69,7 +69,6 @@ class NestedScrollableHost : FrameLayout {
             val scaledDy = dy.absoluteValue * if (isVpHorizontal) 1f else .5f
 
             if (scaledDx > touchSlop || scaledDy > touchSlop) {
-
                 if (isVpHorizontal == (scaledDy > scaledDx)) {
                     // Gesture is perpendicular, allow all parents to intercept
                     parent.requestDisallowInterceptTouchEvent(false)

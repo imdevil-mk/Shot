@@ -7,7 +7,7 @@ import okhttp3.ResponseBody
 import javax.inject.Inject
 
 class TencentNetworkRepository @Inject constructor(
-    private val tencentNetwork: TencentNetworkDataSource
+    private val tencentNetwork: TencentNetworkDataSource,
 ) : TencentRepository {
 
     override suspend fun getUserInfo(uin: String): ResponseBody {
@@ -16,7 +16,7 @@ class TencentNetworkRepository @Inject constructor(
 
     override suspend fun getPlaylistBriefByUser(
         uin: String,
-        size: Int
+        size: Int,
     ): ApiResponse<List<PlaylistBrief>> {
         return tencentNetwork.getPlaylistBriefByUser(uin, size)
     }

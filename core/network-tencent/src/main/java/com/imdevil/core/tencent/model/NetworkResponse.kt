@@ -1,6 +1,5 @@
 package com.imdevil.core.tencent.model
 
-
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -13,5 +12,5 @@ data class NetworkResponse<T>(
     @Json(name = "message")
     val msg: String,
     @Json(name = "data")
-    val data: T
+    val data: T,
 )
