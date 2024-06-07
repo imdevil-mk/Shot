@@ -9,7 +9,7 @@ import okhttp3.Response
 class HostInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val host: Host? = chain.request().getInterestedAnnotation()
-        val request = if (host == null) {
+        val request = if (host == null || chain.request().url.host.contains(TEST_URL)) {
             chain.request()
         } else {
             val url: HttpUrl = chain.request().url.newBuilder().host(host.host).build()
@@ -18,3 +18,5 @@ class HostInterceptor : Interceptor {
         return chain.proceed(request)
     }
 }
+
+const val TEST_URL = "127.0.0.1"

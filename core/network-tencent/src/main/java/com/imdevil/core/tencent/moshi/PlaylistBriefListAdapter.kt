@@ -13,44 +13,21 @@ class PlaylistBriefListAdapter(
     private val delegate: JsonAdapter<List<PlaylistBrief>>,
 ) : JsonAdapter<List<PlaylistBrief>>() {
 
-    private val options: JsonReader.Options = JsonReader.Options.of("disslist")
-
     override fun fromJson(reader: JsonReader): List<PlaylistBrief> {
-        var list = emptyList<PlaylistBrief>()
+        val list = mutableListOf<PlaylistBrief>()
 
         reader.beginObject()
-        /*while (reader.hasNext()) {
-            when (reader.selectName(options)) {
-                0 -> {
-                    (delegate.fromJson(reader))?.let {
-                        list = it
-                    }
-                }
-                -1 -> {
-                    reader.skipName()
-                    reader.skipValue()
-                }
-            }
-        }*/
         while (reader.hasNext()) {
-            when (reader.nextName()) {
+            val name = reader.nextName()
+            when (name) {
                 "data" -> {
-                    reader.beginObject()
-                    while (reader.hasNext()) {
-                        when (reader.selectName(options)) {
-                            0 -> {
-                                (delegate.fromJson(reader))?.let {
-                                    list = it
-                                }
-                            }
+                    list.addAll(processUserCreatePlaylist(reader))
+                    break
+                }
 
-                            -1 -> {
-                                reader.skipName()
-                                reader.skipValue()
-                            }
-                        }
-                    }
-                    reader.endObject()
+                "recommend_playlist" -> {
+                    list.addAll(processRecommendPlaylist(reader))
+                    break
                 }
 
                 else -> {
@@ -63,9 +40,71 @@ class PlaylistBriefListAdapter(
         return list
     }
 
+    // data -> disslist
+    private fun processUserCreatePlaylist(reader: JsonReader): List<PlaylistBrief> {
+        val lists = mutableListOf<PlaylistBrief>()
+        reader.beginObject()
+        while (reader.hasNext()) {
+            val name = reader.nextName()
+            when (name) {
+                "disslist" -> {
+                    (delegate.fromJson(reader))?.let {
+                        lists.addAll(it)
+                    }
+                    break
+                }
+
+                else -> {
+                    reader.skipValue()
+                }
+            }
+        }
+        reader.endObject()
+
+        return lists
+    }
+
+    // recommend_playlist -> data -> v_hot
+    private fun processRecommendPlaylist(reader: JsonReader): List<PlaylistBrief> {
+        val lists = mutableListOf<PlaylistBrief>()
+        reader.beginObject()
+        while (reader.hasNext()) {
+            val name = reader.nextName()
+            when (name) {
+                "data" -> {
+                    reader.beginObject()
+                    while (reader.hasNext()) {
+                        val name1 = reader.nextName()
+                        when (name1) {
+                            "v_hot" -> {
+                                (delegate.fromJson(reader))?.let {
+                                    lists.addAll(it)
+                                }
+                                break
+                            }
+
+                            else -> {
+                                reader.skipValue()
+                            }
+                        }
+                    }
+                    reader.endObject()
+                    break
+                }
+
+                else -> {
+                    reader.skipValue()
+                }
+            }
+        }
+        reader.endObject()
+
+        return lists
+    }
+
     override fun toJson(writer: JsonWriter, value: List<PlaylistBrief>?) {
         writer.beginObject()
-        writer.name("data")
+        writer.name("playlist_briefs")
         delegate.toJson(writer, value)
         writer.endObject()
     }

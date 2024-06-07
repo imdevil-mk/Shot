@@ -1,10 +1,12 @@
 package com.imdevil.core.tencent.retrofit
 
+import androidx.annotation.VisibleForTesting
 import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.moshi.ApiResponseAdapter
 import com.imdevil.core.tencent.moshi.PlaylistAdapter
+import com.imdevil.core.tencent.moshi.PlaylistBriefAdapter
 import com.imdevil.core.tencent.moshi.PlaylistBriefListAdapter
 import com.imdevil.core.tencent.okhttp.CookieInterceptor
 import com.imdevil.shot.core.network.common.model.ApiResponse
@@ -12,6 +14,7 @@ import com.imdevil.shot.core.network.common.okhttp.HostInterceptor
 import com.imdevil.shot.core.network.common.retrofit.ApiResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import okhttp3.ResponseBody
@@ -24,6 +27,7 @@ import javax.inject.Singleton
 @Singleton
 class RetrofitTencentNetwork @Inject constructor(
     private val cookieManager: ICookie,
+    private val httpUrl: HttpUrl,
 ) : TencentNetworkDataSource {
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
@@ -33,16 +37,18 @@ class RetrofitTencentNetwork @Inject constructor(
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 
-    private val moshi: Moshi = Moshi.Builder()
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val moshi: Moshi = Moshi.Builder()
         .add(ApiResponseAdapter.newFactory())
         .add(PlaylistBriefListAdapter.newFactory())
+        .add(PlaylistBriefAdapter.newFactory())
         .add(PlaylistAdapter.newFactory())
         .addLast(KotlinJsonAdapterFactory())
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://c.y.qq.com")
+        .baseUrl(httpUrl)
         .addCallAdapterFactory(ApiResponseCallAdapterFactory())
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
@@ -77,5 +83,33 @@ class RetrofitTencentNetwork @Inject constructor(
             }
         """.trimIndent()
         return api.getSongDetail(param)
+    }
+
+    override suspend fun getRecommend(): ResponseBody {
+        return api.getRecommend()
+    }
+
+    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        return api.getRecommendPlaylist()
+    }
+
+    override suspend fun getNewAlbumArea(): ResponseBody {
+        return api.getNewAlbumArea()
+    }
+
+    override suspend fun getNewAlbumInArea(): ResponseBody {
+        return api.getNewAlbumInArea()
+    }
+
+    override suspend fun getLeaderBoard(): ResponseBody {
+        return api.getLeaderBoard()
+    }
+
+    override suspend fun getHotCategory(): ResponseBody {
+        return api.getHotCategory()
+    }
+
+    override suspend fun getPlaylistByCategory(): ResponseBody {
+        return api.getPlaylistByCategory()
     }
 }
