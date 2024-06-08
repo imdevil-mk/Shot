@@ -1,7 +1,7 @@
 package com.imdevil.shot.core.network.tencent
 
 import com.imdevil.core.tencent.bean.PlaylistBrief
-import com.imdevil.core.tencent.retrofit.RetrofitTencentNetwork
+import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import org.junit.Before
@@ -12,7 +12,7 @@ class MoshiAdapterTest {
 
     @Before
     fun prepare() {
-        moshi = RetrofitTencentNetwork(JvmTestCookieManager()).moshi
+        moshi = NetworkProvideModule.providesTencentMoshi()
     }
 
     @OptIn(ExperimentalStdlibApi::class)

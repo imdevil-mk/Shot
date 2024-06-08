@@ -9,10 +9,8 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+internal interface FlavoredNetworkModule {
 
     @Binds
-    fun bindsTencentNetworkDataSource(
-        networkDataSource: RetrofitTencentNetwork,
-    ): TencentNetworkDataSource
+    fun binds(impl: RetrofitTencentNetwork): TencentNetworkDataSource
 }

@@ -50,4 +50,32 @@ class TencentViewModel @Inject constructor(
     suspend fun getSongDetail(mid: String): ResponseBody {
         return tencentRepository.getSongDetail(mid)
     }
+
+    suspend fun getRecommend(): ResponseBody {
+        return tencentRepository.getRecommend()
+    }
+
+    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        return tencentRepository.getRecommendPlaylist()
+    }
+
+    suspend fun getNewAlbumArea(): ResponseBody {
+        return tencentRepository.getNewAlbumArea()
+    }
+
+    suspend fun getNewAlbumInArea(): ResponseBody {
+        return tencentRepository.getNewAlbumInArea()
+    }
+
+    suspend fun getLeaderBoard(): ResponseBody {
+        return tencentRepository.getLeaderBoard()
+    }
+
+    suspend fun getHotCategory(): ResponseBody {
+        return tencentRepository.getHotCategory()
+    }
+
+    suspend fun getPlaylistByCategory(): ResponseBody {
+        return tencentRepository.getPlaylistByCategory()
+    }
 }

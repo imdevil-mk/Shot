@@ -1,5 +1,6 @@
 package com.imdevil.shot.core.network.tencent
 
+import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.retrofit.RetrofitTencentNetwork
 import kotlinx.coroutines.runBlocking
@@ -13,7 +14,11 @@ class TencentApiTest {
     @Before
     fun prepare() {
         cookieManager = JvmTestCookieManager()
-        subject = RetrofitTencentNetwork(cookieManager)
+        subject = RetrofitTencentNetwork(
+            cookieManager,
+            NetworkProvideModule.providesTencentHttpUrl(),
+            NetworkProvideModule.providesTencentMoshi(),
+        )
     }
 
     @Test

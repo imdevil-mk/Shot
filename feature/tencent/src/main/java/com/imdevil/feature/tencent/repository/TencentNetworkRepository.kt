@@ -28,4 +28,32 @@ class TencentNetworkRepository @Inject constructor(
     override suspend fun getSongDetail(mid: String): ResponseBody {
         return tencentNetwork.getSongDetail(mid)
     }
+
+    override suspend fun getRecommend(): ResponseBody {
+        return tencentNetwork.getRecommend()
+    }
+
+    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        return tencentNetwork.getRecommendPlaylist()
+    }
+
+    override suspend fun getNewAlbumArea(): ResponseBody {
+        return tencentNetwork.getNewAlbumArea()
+    }
+
+    override suspend fun getNewAlbumInArea(): ResponseBody {
+        return tencentNetwork.getNewAlbumInArea()
+    }
+
+    override suspend fun getLeaderBoard(): ResponseBody {
+        return tencentNetwork.getLeaderBoard()
+    }
+
+    override suspend fun getHotCategory(): ResponseBody {
+        return tencentNetwork.getHotCategory()
+    }
+
+    override suspend fun getPlaylistByCategory(): ResponseBody {
+        return tencentNetwork.getPlaylistByCategory()
+    }
 }

@@ -1,6 +1,6 @@
 package com.imdevil.core.common.extensions
 
-public fun <T> List<T>.print(): String {
+fun <T> List<T>.print(): String {
     val sb = StringBuilder()
     this.forEachIndexed { index, t ->
         sb.append(t)

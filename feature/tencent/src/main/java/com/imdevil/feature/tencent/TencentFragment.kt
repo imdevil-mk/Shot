@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
+import com.imdevil.core.common.extensions.print
+import com.imdevil.core.common.log.Dog
+import com.imdevil.shot.core.network.common.model.onSuccess
 import com.imdevil.shot.feature.common.base.BaseFragment
 import com.imdevil.shot.feature.common.demo.DemoListFragment
 import com.imdevil.shot.feature.common.demo.DemoViewPager2Adapter
@@ -63,6 +66,13 @@ class TencentFragment : BaseFragment<FragmentTencentBinding>() {
             // viewModel.getPlaylistBriefByUser("516959708")
             // viewModel.getPlaylist("516959708", "7809078062")
             // viewModel.getSongDetail("002OKIox28ad9a")
+
+            viewModel.getRecommendPlaylist().onSuccess {
+                Dog.d(TAG, "getRecommendPlaylist: size = ${it.size}\n${it.print()}")
+            }
+            viewModel.getPlaylistBriefByUser("516959708").onSuccess {
+                Dog.d(TAG, "getPlaylistBriefByUser: size = ${it.size}\n${it.print()}")
+            }
         }
 
         binding.pager.adapter =

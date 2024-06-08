@@ -1,3 +1,5 @@
+import com.imdevil.shot.Flavor
+
 plugins {
     alias(libs.plugins.shot.android.library)
     alias(libs.plugins.shot.android.hilt)
@@ -10,12 +12,17 @@ android {
         consumerProguardFiles("consumer-proguard-rules.pro")
     }
 
+    sourceSets.getByName(Flavor.demo.name) {
+        assets.srcDirs("../../z_data")
+    }
+
     sourceSets.getByName("test") {
         resources.setSrcDirs(listOf("../../z_data"))
     }
 }
 
 dependencies {
+    api(project(":core:common"))
     api(project(":core:network-common"))
     ksp(libs.moshi.kotlin.codegen)
 

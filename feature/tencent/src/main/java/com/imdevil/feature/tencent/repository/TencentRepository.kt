@@ -23,4 +23,12 @@ interface TencentRepository {
     suspend fun getSongDetail(
         mid: String,
     ): ResponseBody
+
+    suspend fun getRecommend(): ResponseBody
+    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>>
+    suspend fun getNewAlbumArea(): ResponseBody
+    suspend fun getNewAlbumInArea(): ResponseBody
+    suspend fun getLeaderBoard(): ResponseBody
+    suspend fun getHotCategory(): ResponseBody
+    suspend fun getPlaylistByCategory(): ResponseBody
 }

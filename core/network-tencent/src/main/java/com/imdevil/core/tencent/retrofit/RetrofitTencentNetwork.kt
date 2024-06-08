@@ -1,19 +1,13 @@
 package com.imdevil.core.tencent.retrofit
 
-import androidx.annotation.VisibleForTesting
 import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.model.ICookie
-import com.imdevil.core.tencent.moshi.ApiResponseAdapter
-import com.imdevil.core.tencent.moshi.PlaylistAdapter
-import com.imdevil.core.tencent.moshi.PlaylistBriefAdapter
-import com.imdevil.core.tencent.moshi.PlaylistBriefListAdapter
 import com.imdevil.core.tencent.okhttp.CookieInterceptor
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import com.imdevil.shot.core.network.common.okhttp.HostInterceptor
 import com.imdevil.shot.core.network.common.retrofit.ApiResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
@@ -28,6 +22,7 @@ import javax.inject.Singleton
 class RetrofitTencentNetwork @Inject constructor(
     private val cookieManager: ICookie,
     private val httpUrl: HttpUrl,
+    private val moshi: Moshi,
 ) : TencentNetworkDataSource {
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
@@ -35,15 +30,6 @@ class RetrofitTencentNetwork @Inject constructor(
         .addInterceptor(HostInterceptor())
         .addInterceptor(CookieInterceptor(cookieManager))
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        .build()
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    val moshi: Moshi = Moshi.Builder()
-        .add(ApiResponseAdapter.newFactory())
-        .add(PlaylistBriefListAdapter.newFactory())
-        .add(PlaylistBriefAdapter.newFactory())
-        .add(PlaylistAdapter.newFactory())
-        .addLast(KotlinJsonAdapterFactory())
         .build()
 
     private val retrofit: Retrofit = Retrofit.Builder()

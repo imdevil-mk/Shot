@@ -14,3 +14,40 @@ sealed class ApiResponse<T> {
         val throwable: Throwable,
     ) : ApiResponse<T>()
 }
+
+fun <T> ApiResponse<T>.onSuccess(action: (t: T) -> Unit): ApiResponse<T> {
+    when (this) {
+        is ApiResponse.Success -> {
+            action(this.data)
+        }
+
+        else -> {
+        }
+    }
+    return this
+}
+
+fun <T> ApiResponse<T>.onBizError(action: (code: Int, msg: String) -> Unit): ApiResponse<T> {
+    when (this) {
+        is ApiResponse.BizError -> {
+            action(this.code, this.msg)
+        }
+
+        else -> {
+        }
+    }
+    return this
+}
+
+fun <T> ApiResponse<T>.onOtherError(action: (throwable: Throwable) -> Unit): ApiResponse<T> {
+    when (this) {
+        is ApiResponse.OtherError -> {
+            action(throwable)
+        }
+
+        else -> {
+        }
+    }
+    return this
+}
+
