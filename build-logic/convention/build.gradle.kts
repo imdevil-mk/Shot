@@ -26,7 +26,6 @@ dependencies {
     compileOnly(libs.room.gradlePlugin)
 }
 
-
 tasks {
     validatePlugins {
         enableStricterValidation = true
@@ -39,6 +38,10 @@ gradlePlugin {
         register("androidApplication") {
             id = "shot.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
+        }
+        register("androidFlavors") {
+            id = "shot.android.application.flavors"
+            implementationClass = "AndroidApplicationFlavorsConventionPlugin"
         }
         register("androidLibrary") {
             id = "shot.android.library"

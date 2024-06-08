@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.imdevil.shot.configureFlavors
 import com.imdevil.shot.configureKotlinAndroid
 import com.imdevil.shot.configurePrintApksTask
 import org.gradle.api.Plugin
@@ -13,15 +12,14 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
-                apply("androidx.navigation.safeargs.kotlin")
                 apply("shot.android.hilt")
+                apply("androidx.navigation.safeargs.kotlin")
             }
 
             extensions.configure<ApplicationExtension> {
                 configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 33
                 buildFeatures.viewBinding = true
-                configureFlavors(this)
             }
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 configurePrintApksTask(this)

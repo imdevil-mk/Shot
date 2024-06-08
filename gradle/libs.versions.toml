@@ -165,6 +165,7 @@ room = { id = "androidx.room", version.ref = "room" }
 
 # Plugins defined by this project
 shot-android-application = { id = "shot.android.application", version = "unspecified" }
+shot-android-application-flavors = { id = "shot.android.application.flavors", version = "unspecified" }
 shot-android-hilt = { id = "shot.android.hilt", version = "unspecified" }
 shot-android-library = { id = "shot.android.library", version = "unspecified" }
 shot-android-lint = { id = "shot.android.lint", version = "unspecified" }
