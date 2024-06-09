@@ -3,7 +3,9 @@ package com.imdevil.feature.tencent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
 import com.imdevil.feature.tencent.repository.TencentRepository
 import com.imdevil.shot.core.data.repository.UserDataRepository
 import com.imdevil.shot.core.model.data.Cookie
@@ -43,6 +45,18 @@ class TencentViewModel @Inject constructor(
         return tencentRepository.getPlaylistBriefByUser(uin, size)
     }
 
+    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        return tencentRepository.getRecommendPlaylist()
+    }
+
+    suspend fun getNewSongs(): ApiResponse<List<SongBrief>> {
+        return tencentRepository.getNewSongs()
+    }
+
+    suspend fun getHotKeys(): ApiResponse<List<HotKey>> {
+        return tencentRepository.getHotKeys()
+    }
+
     suspend fun getPlaylist(uin: String, tid: String): ResponseBody {
         return tencentRepository.getPlaylist(uin, tid)
     }
@@ -53,10 +67,6 @@ class TencentViewModel @Inject constructor(
 
     suspend fun getRecommend(): ResponseBody {
         return tencentRepository.getRecommend()
-    }
-
-    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
-        return tencentRepository.getRecommendPlaylist()
     }
 
     suspend fun getNewAlbumArea(): ResponseBody {

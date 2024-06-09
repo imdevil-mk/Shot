@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
 import com.imdevil.core.common.extensions.print
 import com.imdevil.core.common.log.Dog
+import com.imdevil.feature.tencent.feature.recommend.RecommendFragment
 import com.imdevil.shot.core.network.common.model.onSuccess
 import com.imdevil.shot.feature.common.base.BaseFragment
 import com.imdevil.shot.feature.common.demo.DemoListFragment
@@ -25,7 +26,7 @@ class TencentFragment : BaseFragment<FragmentTencentBinding>() {
 
     private val fragmentCreators = listOf<() -> Fragment>(
         {
-            DemoListFragment.newInstance("Demo")
+            RecommendFragment()
         },
         {
             DemoListFragment.newInstance("Demo")
@@ -72,6 +73,12 @@ class TencentFragment : BaseFragment<FragmentTencentBinding>() {
             }
             viewModel.getPlaylistBriefByUser("516959708").onSuccess {
                 Dog.d(TAG, "getPlaylistBriefByUser: size = ${it.size}\n${it.print()}")
+            }
+            viewModel.getNewSongs().onSuccess {
+                Dog.d(TAG, "getNewSongs: size = ${it.size}\n${it.print()}")
+            }
+            viewModel.getHotKeys().onSuccess {
+                Dog.d(TAG, "getHotKeys: size = ${it.size}\n${it.print()}")
             }
         }
 

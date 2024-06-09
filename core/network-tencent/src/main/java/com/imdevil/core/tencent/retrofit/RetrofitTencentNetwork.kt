@@ -1,7 +1,9 @@
 package com.imdevil.core.tencent.retrofit
 
 import com.imdevil.core.tencent.TencentNetworkDataSource
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.okhttp.CookieInterceptor
 import com.imdevil.shot.core.network.common.model.ApiResponse
@@ -52,8 +54,12 @@ class RetrofitTencentNetwork @Inject constructor(
         return api.getPlaylistBriefByUser(uin, size)
     }
 
-    override suspend fun getPlaylist(uin: String, tid: String): ResponseBody {
-        return api.getPlaylist(uin, tid)
+    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        return api.getRecommendPlaylist()
+    }
+
+    override suspend fun getNewSongs(): ApiResponse<List<SongBrief>> {
+        return api.getNewSongs()
     }
 
     override suspend fun getSongDetail(mid: String): ResponseBody {
@@ -71,12 +77,16 @@ class RetrofitTencentNetwork @Inject constructor(
         return api.getSongDetail(param)
     }
 
-    override suspend fun getRecommend(): ResponseBody {
-        return api.getRecommend()
+    override suspend fun getHotKeys(): ApiResponse<List<HotKey>> {
+        return api.getHotKeys()
     }
 
-    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
-        return api.getRecommendPlaylist()
+    override suspend fun getPlaylist(uin: String, tid: String): ResponseBody {
+        return api.getPlaylist(uin, tid)
+    }
+
+    override suspend fun getRecommend(): ResponseBody {
+        return api.getRecommend()
     }
 
     override suspend fun getNewAlbumArea(): ResponseBody {

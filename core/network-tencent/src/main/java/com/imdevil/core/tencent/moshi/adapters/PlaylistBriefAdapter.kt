@@ -1,4 +1,4 @@
-package com.imdevil.core.tencent.moshi
+package com.imdevil.core.tencent.moshi.adapters
 
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.squareup.moshi.JsonAdapter
@@ -125,7 +125,6 @@ class PlaylistBriefAdapter(
                 ): JsonAdapter<*>? {
                     if (annotations.isNotEmpty()) return null
                     if (type != PlaylistBrief::class.java) return null
-                    println("PlaylistBriefAdapter#elementType = $type")
                     return PlaylistBriefAdapter(moshi)
                 }
             }

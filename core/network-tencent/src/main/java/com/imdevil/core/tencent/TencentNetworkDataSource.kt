@@ -1,6 +1,8 @@
 package com.imdevil.core.tencent
 
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import okhttp3.ResponseBody
 
@@ -15,6 +17,12 @@ interface TencentNetworkDataSource {
         size: Int = 200,
     ): ApiResponse<List<PlaylistBrief>>
 
+    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>>
+
+    suspend fun getNewSongs(): ApiResponse<List<SongBrief>>
+
+    suspend fun getHotKeys(): ApiResponse<List<HotKey>>
+
     suspend fun getPlaylist(
         uin: String,
         tid: String,
@@ -25,7 +33,6 @@ interface TencentNetworkDataSource {
     ): ResponseBody
 
     suspend fun getRecommend(): ResponseBody
-    suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>>
     suspend fun getNewAlbumArea(): ResponseBody
     suspend fun getNewAlbumInArea(): ResponseBody
     suspend fun getLeaderBoard(): ResponseBody

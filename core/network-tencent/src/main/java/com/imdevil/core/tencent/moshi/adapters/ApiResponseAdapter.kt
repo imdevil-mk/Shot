@@ -1,6 +1,8 @@
-package com.imdevil.core.tencent.moshi
+package com.imdevil.core.tencent.moshi.adapters
 
+import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.shot.core.network.common.model.ApiResponse
+import com.imdevil.shot.core.network.common.utils.findAnnotatedMoshiAdapter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
@@ -23,21 +25,21 @@ class ApiResponseAdapter<T>(
         var msg = ""
 
         val peeked = reader.peekJson()
-        reader.beginObject()
-        while (reader.hasNext()) {
-            when (reader.nextName()) {
-                "code" -> code = reader.nextInt()
-                "subcode" -> subCode = reader.nextInt()
-                "message" -> msg = reader.nextString()
+        peeked.beginObject()
+        while (peeked.hasNext()) {
+            when (peeked.nextName()) {
+                "code" -> code = peeked.nextInt()
+                "subcode" -> subCode = peeked.nextInt()
+                "message" -> msg = peeked.nextString()
                 else -> {
-                    reader.skipValue()
+                    peeked.skipValue()
                 }
             }
         }
-        reader.endObject()
+        peeked.endObject()
 
         val apiResponse = if (code == 0) {
-            val dataResponse: T = delegate.fromJson(peeked)!!
+            val dataResponse: T = delegate.fromJson(reader)!!
             ApiResponse.Success(dataResponse)
         } else {
             ApiResponse.BizError(code, msg)
@@ -56,6 +58,14 @@ class ApiResponseAdapter<T>(
                     annotations: MutableSet<out Annotation>,
                     moshi: Moshi,
                 ): JsonAdapter<*>? {
+                    val wantedAdapter = annotations.findAnnotatedMoshiAdapter()
+                    val wantedFactory = MoshiAdapters.get(wantedAdapter)
+                    if (wantedFactory != null) {
+                        println("ApiResponseAdapter#AnnotatedMoshiAdapter = $wantedAdapter")
+                        val delegate =
+                            wantedFactory.create(type, annotations, moshi) as JsonAdapter<*>
+                        return ApiResponseAdapter(moshi, delegate)
+                    }
                     if (annotations.isNotEmpty()) return null
                     if (type !is ParameterizedType) return null
                     if (type.rawType != ApiResponse::class.java) return null

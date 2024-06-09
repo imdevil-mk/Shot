@@ -4,10 +4,13 @@ import com.imdevil.core.common.Dispatcher
 import com.imdevil.core.common.ShotDispatchers
 import com.imdevil.core.tencent.JvmUnitTestDemoAssetManager
 import com.imdevil.core.tencent.TencentNetworkDataSource
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.moshi.MoshiAdapters
+import com.imdevil.core.tencent.moshi.findApiResponseAdapter
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
 import kotlinx.coroutines.CoroutineDispatcher
 import okhttp3.ResponseBody
 import okhttp3.ResponseBody.Companion.asResponseBody
@@ -15,7 +18,6 @@ import okio.buffer
 import okio.source
 import javax.inject.Inject
 
-@OptIn(ExperimentalStdlibApi::class)
 class DemoTencentNetworkDataSource @Inject constructor(
     @Dispatcher(ShotDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val moshi: Moshi,
@@ -33,9 +35,31 @@ class DemoTencentNetworkDataSource @Inject constructor(
         uin: String,
         size: Int
     ): ApiResponse<List<PlaylistBrief>> {
-        val adapter = moshi.adapter<List<PlaylistBrief>>()
+        val adapter =
+            moshi.findApiResponseAdapter<List<PlaylistBrief>>(MoshiAdapters.USER_CREATE_PLAYLIST_JSON_ADAPTER)
         val data = adapter.fromJson(assets.open("user_create_playlist.json").source().buffer())
-        return ApiResponse.Success(data ?: emptyList())
+        return data ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+    }
+
+    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
+        val adapter =
+            moshi.findApiResponseAdapter<List<PlaylistBrief>>(MoshiAdapters.RECOMMEND_PLAYLIST_JSON_ADAPTER)
+        val data = adapter.fromJson(assets.open("recommend_playlist.json").source().buffer())
+        return data ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+    }
+
+    override suspend fun getNewSongs(): ApiResponse<List<SongBrief>> {
+        val adapter =
+            moshi.findApiResponseAdapter<List<SongBrief>>(MoshiAdapters.NEW_SONGS_JSON_ADAPTER)
+        val data = adapter.fromJson(assets.open("new_songs.json").source().buffer())
+        return data ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+    }
+
+    override suspend fun getHotKeys(): ApiResponse<List<HotKey>> {
+        val adapter =
+            moshi.findApiResponseAdapter<List<HotKey>>(MoshiAdapters.HOT_KEYS_JSON_ADAPTER)
+        val data = adapter.fromJson(assets.open("hot_keys.json").source().buffer())
+        return data ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
     }
 
     override suspend fun getPlaylist(uin: String, tid: String): ResponseBody {
@@ -48,12 +72,6 @@ class DemoTencentNetworkDataSource @Inject constructor(
 
     override suspend fun getRecommend(): ResponseBody {
         return makeResponseBody("recommend.json")
-    }
-
-    override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {
-        val adapter = moshi.adapter<List<PlaylistBrief>>()
-        val data = adapter.fromJson(assets.open("recommend_playlist.json").source().buffer())
-        return ApiResponse.Success(data ?: emptyList())
     }
 
     override suspend fun getNewAlbumArea(): ResponseBody {

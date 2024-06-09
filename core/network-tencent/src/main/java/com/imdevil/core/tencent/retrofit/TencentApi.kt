@@ -1,8 +1,12 @@
 package com.imdevil.core.tencent.retrofit
 
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import com.imdevil.shot.core.network.common.model.Host
+import com.imdevil.shot.core.network.common.model.MoshiAdapter
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -40,6 +44,7 @@ interface TencentApi {
      */
     @Headers("Referer: https://y.qq.com/portal/profile.html")
     @GET("/rsc/fcgi-bin/fcg_user_created_diss")
+    @MoshiAdapter(MoshiAdapters.USER_CREATE_PLAYLIST_JSON_ADAPTER)
     suspend fun getPlaylistBriefByUser(
         @Query("hostuin") uin: String,
         @Query("size") size: Int = 200,
@@ -154,6 +159,7 @@ interface TencentApi {
      */
     @Host("u.y.qq.com")
     @GET("/cgi-bin/musicu.fcg")
+    @MoshiAdapter(MoshiAdapters.RECOMMEND_PLAYLIST_JSON_ADAPTER)
     suspend fun getRecommendPlaylist(
         @Query("data") data: String = """
 {
@@ -283,6 +289,54 @@ interface TencentApi {
 }
         """.trimIndent(),
     ): ResponseBody
+
+    /**
+     * 获取热词
+     */
+    @Host("u.y.qq.com")
+    @GET("/cgi-bin/musicu.fcg")
+    @MoshiAdapter(MoshiAdapters.HOT_KEYS_JSON_ADAPTER)
+    suspend fun getHotKeys(
+        @Query("data") data: String = """
+{
+    "comm": {
+        "ct": 24
+    },
+    "hot_songs": {
+        "module": "music.musicsearch.HotkeyService",
+        "method": "GetHotkeyForQQMusicMobile",
+        "param": {
+          "searchid": "",
+          "remoteplace": "txt.yqq.top",
+          "from": "yqqweb"
+        }
+    }
+}
+        """.trimIndent(),
+    ): ApiResponse<List<HotKey>>
+
+    /**
+     * 获取新歌
+     */
+    @Host("u.y.qq.com")
+    @GET("/cgi-bin/musicu.fcg")
+    @MoshiAdapter(MoshiAdapters.NEW_SONGS_JSON_ADAPTER)
+    suspend fun getNewSongs(
+        @Query("data") data: String = """
+{
+    "comm": {
+        "ct": 24
+    },
+    "new_songs": {
+        "module": "newsong.NewSongServer",
+        "method": "get_new_song_info",
+        "param": {
+          "type": null
+        }
+    }
+}
+        """.trimIndent(),
+    ): ApiResponse<List<SongBrief>>
 
     /**
      * 获取榜单

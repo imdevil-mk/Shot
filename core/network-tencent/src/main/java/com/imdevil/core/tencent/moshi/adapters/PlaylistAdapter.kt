@@ -1,4 +1,4 @@
-package com.imdevil.core.tencent.moshi
+package com.imdevil.core.tencent.moshi.adapters
 
 import com.imdevil.core.tencent.bean.Playlist
 import com.squareup.moshi.JsonAdapter

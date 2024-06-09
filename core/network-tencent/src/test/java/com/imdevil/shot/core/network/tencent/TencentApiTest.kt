@@ -3,13 +3,15 @@ package com.imdevil.shot.core.network.tencent
 import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.retrofit.RetrofitTencentNetwork
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
 class TencentApiTest {
     private lateinit var cookieManager: ICookie
     private lateinit var subject: RetrofitTencentNetwork
+    private val testDispatcher = StandardTestDispatcher()
 
     @Before
     fun prepare() {
@@ -27,58 +29,57 @@ class TencentApiTest {
     }
 
     @Test
-    fun testGetUserInfo() {
-        runBlocking {
-            subject.getUserInfo("")
-        }
+    fun testGetUserInfo() = runTest {
+        subject.getUserInfo("")
     }
 
     @Test
-    fun testGetRecommend() {
-        runBlocking {
-            subject.getRecommend()
-        }
+    fun testGetRecommendPlaylist() = runTest {
+        subject.getRecommendPlaylist()
     }
 
     @Test
-    fun testGetRecommendPlaylist() {
-        runBlocking {
-            subject.getRecommendPlaylist()
-        }
+    fun testGetPlaylistByCategory() = runTest {
+        subject.getPlaylistByCategory()
     }
 
     @Test
-    fun testGetNewAlbumArea() {
-        runBlocking {
-            subject.getNewAlbumArea()
-        }
+    fun testGetNewSongs() = runTest {
+        subject.getNewSongs()
     }
 
     @Test
-    fun testGetNewAlbumInArea() {
-        runBlocking {
-            subject.getNewAlbumInArea()
-        }
+    fun testGetSongDetail() = runTest {
+        subject.getSongDetail("004IXgOS20hEjo")
     }
 
     @Test
-    fun testGetLeaderBoard() {
-        runBlocking {
-            subject.getLeaderBoard()
-        }
+    fun testGetHotKeys() = runTest {
+        subject.getHotKeys()
     }
 
     @Test
-    fun testGetHotCategory() {
-        runBlocking {
-            subject.getHotCategory()
-        }
+    fun testGetRecommend() = runTest {
+        subject.getRecommend()
     }
 
     @Test
-    fun testPlaylistByCategory() {
-        runBlocking {
-            subject.getPlaylistByCategory()
-        }
+    fun testGetNewAlbumArea() = runTest {
+        subject.getNewAlbumArea()
+    }
+
+    @Test
+    fun testGetNewAlbumInArea() = runTest {
+        subject.getNewAlbumInArea()
+    }
+
+    @Test
+    fun testGetLeaderBoard() = runTest {
+        subject.getLeaderBoard()
+    }
+
+    @Test
+    fun testGetHotCategory() = runTest {
+        subject.getHotCategory()
     }
 }

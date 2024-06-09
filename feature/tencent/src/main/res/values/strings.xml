@@ -2,4 +2,7 @@
 <resources>
     <string name="qq_music">QQ音乐</string>
     <string name="tencent_instance_summary">添加QQ音乐Cookie</string>
+
+    <string name="feature_recommend">推荐</string>
+    <string name="feature_home">我的</string>
 </resources>

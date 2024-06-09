@@ -5,20 +5,20 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SongBrief(
-    @Json(name = "songid")
+    @Json(name = "id")
     val id: String,
-    @Json(name = "songmid")
+    @Json(name = "mid")
     val mid: String,
-    @Json(name = "songname")
+    @Json(name = "name")
     val name: String,
     @Json(name = "strMediaMid")
-    val mediaId: String,
+    val mediaId: String = "",
     @Json(name = "singer")
     val singers: List<SingerBrief>,
     @Json(name = "albumid")
-    val albumId: String,
+    val albumId: String = "",
     @Json(name = "albummid")
-    val albumMid: String,
+    val albumMid: String = "",
     @Json(name = "albumname")
-    val albumName: String,
+    val albumName: String = "",
 )

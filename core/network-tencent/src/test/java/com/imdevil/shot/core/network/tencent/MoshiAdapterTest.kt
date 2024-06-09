@@ -1,9 +1,18 @@
 package com.imdevil.shot.core.network.tencent
 
+import com.imdevil.core.common.extensions.print
+import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
+import com.imdevil.core.tencent.bean.SongBrief
 import com.imdevil.core.tencent.di.NetworkProvideModule
+import com.imdevil.core.tencent.moshi.MoshiAdapters
+import com.imdevil.core.tencent.moshi.findApiResponseAdapter
+import com.imdevil.shot.core.network.common.model.ApiResponse
+import com.imdevil.shot.core.network.common.model.onOtherError
+import com.imdevil.shot.core.network.common.model.onSuccess
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.adapter
+import org.junit.Assert
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 
@@ -15,37 +24,79 @@ class MoshiAdapterTest {
         moshi = NetworkProvideModule.providesTencentMoshi()
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     @Test
-    fun testGetUserCreatePlaylist() {
+    fun testGetUserCreatePlaylistApiResponse() {
         val json = getJson("user_create_playlist.json")
 
-        val adapter = moshi.adapter<List<PlaylistBrief>>()
-        val list = adapter.fromJson(json) ?: emptyList()
-
-        list.forEach {
+        val adapter =
+            moshi.findApiResponseAdapter<List<PlaylistBrief>>(MoshiAdapters.USER_CREATE_PLAYLIST_JSON_ADAPTER)
+        val response =
+            adapter.fromJson(json) ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+        response.onSuccess {
+            println(it.size)
+            println(it.print())
+            Assert.assertEquals(it.size, 11)
+            Assert.assertEquals(it[0].id, "0")
+        }.onOtherError {
             println(it)
+            fail()
         }
-
-        println(adapter.toJson(list))
-
-        assert(list.isNotEmpty())
     }
 
-    @OptIn(ExperimentalStdlibApi::class)
     @Test
-    fun testPlaylistBriefAdapter() {
+    fun testGetRecommendPlaylistBriefApiResponse() {
         val json = getJson("recommend_playlist.json")
 
-        val adapter = moshi.adapter<List<PlaylistBrief>>()
-        val list = adapter.fromJson(json) ?: emptyList()
-
-        list.forEach {
+        val adapter =
+            moshi.findApiResponseAdapter<List<PlaylistBrief>>(MoshiAdapters.RECOMMEND_PLAYLIST_JSON_ADAPTER)
+        val response =
+            adapter.fromJson(json) ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+        response.onSuccess {
+            println(it.size)
+            println(it.print())
+            Assert.assertEquals(it.size, 11)
+            Assert.assertEquals(it[0].id, "8075336924")
+        }.onOtherError {
             println(it)
+            fail()
         }
+    }
 
-        println(adapter.toJson(list))
+    @Test
+    fun testGetNewSongsApiResponse() {
+        val json = getJson("new_songs.json")
 
-        assert(list.isNotEmpty())
+        val adapter =
+            moshi.findApiResponseAdapter<List<SongBrief>>(MoshiAdapters.NEW_SONGS_JSON_ADAPTER)
+        val response =
+            adapter.fromJson(json) ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+        response.onSuccess {
+            println(it.size)
+            println(it.print())
+            Assert.assertEquals(it.size, 76)
+            Assert.assertEquals(it[0].id, "493371050")
+        }.onOtherError {
+            println(it)
+            fail()
+        }
+    }
+
+    @Test
+    fun testGetHotKeysApiResponse() {
+        val json = getJson("hot_keys.json")
+
+        val adapter =
+            moshi.findApiResponseAdapter<List<HotKey>>(MoshiAdapters.HOT_KEYS_JSON_ADAPTER)
+        val response =
+            adapter.fromJson(json) ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+        response.onSuccess {
+            println(it.size)
+            println(it.print())
+            Assert.assertEquals(it.size, 30)
+            Assert.assertEquals(it[0].id, "465608024")
+        }.onOtherError {
+            println(it)
+            fail()
+        }
     }
 }
