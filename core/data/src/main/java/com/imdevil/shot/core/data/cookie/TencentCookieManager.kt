@@ -1,4 +1,4 @@
-package com.imdevil.feature.tencent.cookie
+package com.imdevil.shot.core.data.cookie
 
 import com.imdevil.core.common.di.ApplicationScope
 import com.imdevil.core.tencent.model.ICookie

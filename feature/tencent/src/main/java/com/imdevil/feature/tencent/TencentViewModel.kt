@@ -3,10 +3,10 @@ package com.imdevil.feature.tencent
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
-import com.imdevil.feature.tencent.repository.TencentRepository
 import com.imdevil.shot.core.data.repository.UserDataRepository
 import com.imdevil.shot.core.model.data.Cookie
 import com.imdevil.shot.core.network.common.model.ApiResponse
@@ -22,7 +22,7 @@ import kotlin.time.Duration.Companion.seconds
 class TencentViewModel @Inject constructor(
     application: Application,
     private val userDataRepository: UserDataRepository,
-    private val tencentRepository: TencentRepository,
+    private val tencentRepository: TencentNetworkDataSource,
 ) : AndroidViewModel(application) {
 
     val cookies: StateFlow<List<Cookie>> = userDataRepository.tCookies

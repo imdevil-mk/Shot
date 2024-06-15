@@ -15,6 +15,7 @@ android {
 }
 
 dependencies {
+    api(project(":core:ui"))
     api(project(":core:model"))
     api(project(":core:common"))
     api(project(":core:data"))

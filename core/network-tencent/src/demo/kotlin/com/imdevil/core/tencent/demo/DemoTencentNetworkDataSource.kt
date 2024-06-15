@@ -7,6 +7,7 @@ import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.core.tencent.moshi.findApiResponseAdapter
 import com.imdevil.shot.core.network.common.model.ApiResponse
@@ -22,6 +23,7 @@ class DemoTencentNetworkDataSource @Inject constructor(
     @Dispatcher(ShotDispatchers.IO) private val ioDispatcher: CoroutineDispatcher,
     private val moshi: Moshi,
     private val assets: DemoAssetManager = JvmUnitTestDemoAssetManager,
+    private val cookieManager: ICookie,
 ) : TencentNetworkDataSource {
     private fun makeResponseBody(file: String): ResponseBody {
         return assets.open(file).source().buffer().asResponseBody()
