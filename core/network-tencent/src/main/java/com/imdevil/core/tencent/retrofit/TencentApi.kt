@@ -3,6 +3,7 @@ package com.imdevil.core.tencent.retrofit
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.bean.UserInfo
 import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import com.imdevil.shot.core.network.common.model.Host
@@ -18,8 +19,11 @@ interface TencentApi {
      * 获取用户主页信息
      */
     @GET("/rsc/fcgi-bin/fcg_get_profile_homepage.fcg")
+    @MoshiAdapter(MoshiAdapters.USER_INFO_JSON_ADAPTER)
     suspend fun getUserInfo(
+        /*
         @Query("userid") userid: String,
+         */
         @Query("cid") cid: Int = 205360838,
         @Query("reqfrom") reqfrom: Int = 1,
         /*
@@ -37,7 +41,7 @@ interface TencentApi {
         @Query("notice") notice: String = "0",
         @Query("platform") platform: String = "yqq.json",
         @Query("needNewCode") needNewCode: String = "0",
-    ): ResponseBody
+    ): ApiResponse<UserInfo>
 
     /**
      * 获取用户创建的歌单列表
@@ -46,7 +50,9 @@ interface TencentApi {
     @GET("/rsc/fcgi-bin/fcg_user_created_diss")
     @MoshiAdapter(MoshiAdapters.USER_CREATE_PLAYLIST_JSON_ADAPTER)
     suspend fun getPlaylistBriefByUser(
+        /*
         @Query("hostuin") uin: String,
+         */
         @Query("size") size: Int = 200,
         @Query("hostUin") hostUin: String = "0",
         @Query("sin") sin: Int = 0,

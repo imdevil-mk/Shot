@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tencent_nav">
+    android:id="@+id/tencent_nav"
+    app:startDestination="@id/homepageFragment">
+
+    <fragment
+        android:id="@+id/homepageFragment"
+        android:name="com.imdevil.feature.tencent.feature.home.HomepageFragment"
+        android:label="HomepageFragment">
+        <deepLink app:uri="android-app://app.imdevil.shot/feature_tencent/home" />
+    </fragment>
 
     <fragment
         android:id="@+id/tencentFragment"

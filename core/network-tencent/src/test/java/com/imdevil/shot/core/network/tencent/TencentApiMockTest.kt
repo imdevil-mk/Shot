@@ -4,7 +4,6 @@ import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.imdevil.core.tencent.retrofit.RetrofitTencentNetwork
 import com.imdevil.shot.core.network.common.model.onFail
 import com.imdevil.shot.core.network.common.model.onSuccess
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
@@ -29,11 +28,13 @@ class TencentApiMockTest {
     }
 
     @Test
-    fun testGetUserInfo() {
+    fun testGetUserInfo() = runTest {
         server.enqueue(MockResponse().setBody(getJson("user_info.json")))
-
-        runBlocking {
-            subject.getUserInfo("")
+        subject.getUserInfo("7K6sNK4q7inF").onSuccess { userInfo ->
+            println(userInfo)
+            assertEquals(userInfo.uin, "7K6sNK4q7inF")
+        }.onFail {
+            fail()
         }
     }
 

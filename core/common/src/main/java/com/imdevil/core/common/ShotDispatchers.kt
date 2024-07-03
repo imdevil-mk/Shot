@@ -26,4 +26,5 @@ annotation class Dispatcher(val niaDispatcher: ShotDispatchers)
 enum class ShotDispatchers {
     Default,
     IO,
+    MAIN,
 }

@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.imdevil.shot.R
-import com.imdevil.shot.adapter.LOCAL_FRAGMENT_INDEX
+import com.imdevil.shot.adapter.MAIN_NAV_HOMEPAGE
+import com.imdevil.shot.adapter.MAIN_NAV_ONBOARD
 import com.imdevil.shot.adapter.MainViewPagerAdapter
-import com.imdevil.shot.adapter.NETEASE_FRAGMENT_INDEX
-import com.imdevil.shot.adapter.TENCENT_FRAGMENT_INDEX
 import com.imdevil.shot.databinding.FragmentMainViewPagerBinding
 import com.imdevil.shot.feature.common.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,15 +39,14 @@ class MainViewPagerFragment : BaseFragment<FragmentMainViewPagerBinding>() {
                 binding.bottomNav.menu.getItem(position).isChecked = true
             }
         })
-        binding.pager.currentItem = TENCENT_FRAGMENT_INDEX
+        binding.pager.currentItem = MAIN_NAV_HOMEPAGE
     }
 
     private fun installBottomNavigation() {
         binding.bottomNav.setOnItemSelectedListener {
             val index = when (it.itemId) {
-                R.id.main_netease -> NETEASE_FRAGMENT_INDEX
-                R.id.main_qq -> TENCENT_FRAGMENT_INDEX
-                R.id.main_local -> LOCAL_FRAGMENT_INDEX
+                R.id.main_nav_onboard -> MAIN_NAV_ONBOARD
+                R.id.main_nav_homepage -> MAIN_NAV_HOMEPAGE
                 else -> throw IndexOutOfBoundsException()
             }
             binding.pager.setCurrentItem(index, false)

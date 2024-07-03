@@ -7,7 +7,15 @@ option java_multiple_files = true;
 
 message TencentUserProfile {
   repeated ProtoCookie cookies = 1;
-  string uid = 2;
-  string name = 3;
-  string avtar = 4;
+  string uin = 2;
+  string euin = 3;
+  string name = 4;
+  string avtar = 5;
+  int64 follows = 6;
+  int64 followedSingers = 7;
+  int64 followedUsers = 8;
+  int64 fans = 9;
+  int64 friends = 10;
+  int64 visitors = 11;
+  repeated string icons = 12;
 }

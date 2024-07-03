@@ -4,6 +4,7 @@ import com.imdevil.core.common.extensions.print
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.bean.UserInfo
 import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.core.tencent.moshi.findApiResponseAdapter
@@ -22,6 +23,35 @@ class MoshiAdapterTest {
     @Before
     fun prepare() {
         moshi = NetworkProvideModule.providesTencentMoshi()
+    }
+
+    @Test
+    fun testFailApiResponse() {
+        val adapter =
+            moshi.findApiResponseAdapter<UserInfo>(MoshiAdapters.USER_INFO_JSON_ADAPTER)
+
+        println(adapter.toJson(ApiResponse.OtherError(IllegalStateException("IllegalStateException"))))
+        println(adapter.toJson(ApiResponse.BizError(1001, "error test")))
+
+    }
+
+    @Test
+    fun testGetUserInfoApiResponse() {
+        val json = getJson("user_info.json")
+        val adapter =
+            moshi.findApiResponseAdapter<UserInfo>(MoshiAdapters.USER_INFO_JSON_ADAPTER)
+        val response =
+            adapter.fromJson(json) ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
+        response.onSuccess {
+            println(adapter.toJson(ApiResponse.Success(it)))
+            println(it.name)
+            println(it.uin)
+            println(it.icons.size)
+            Assert.assertEquals(it.name, "imdevil")
+        }.onOtherError {
+            println(it)
+            fail()
+        }
     }
 
     @Test

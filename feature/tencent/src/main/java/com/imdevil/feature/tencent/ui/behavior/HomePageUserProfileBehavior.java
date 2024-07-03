@@ -95,7 +95,7 @@ class HomePageUserProfileBehavior extends HeaderBehavior<View> {
                         + " heightMeasureSpec = " + heightMeasureSpec
                         + " heightUsed = " + heightUsed
                 );
-                */
+                //*/
                 // Now measure the scrolling view with the correct height
                 parent.onMeasureChild(
                         child, parentWidthMeasureSpec, widthUsed, heightMeasureSpec, heightUsed);

@@ -5,26 +5,28 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.imdevil.core.common.extensions.print
 import com.imdevil.core.common.log.Dog
+import com.imdevil.core.common.utils.WhileViewSubscribed
 import com.imdevil.shot.core.data.repository.UserDataRepository
+import com.imdevil.shot.core.data.viewmodel.SignInViewModelDelegate
 import com.imdevil.shot.core.model.data.Cookie
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.seconds
 
 @HiltViewModel
 class AddCookiesViewModel @Inject constructor(
-    application: Application,
     private val userDataRepository: UserDataRepository,
-) : AndroidViewModel(application) {
+    private val signInViewModelDelegate: SignInViewModelDelegate,
+    application: Application,
+) : AndroidViewModel(application),
+    SignInViewModelDelegate by signInViewModelDelegate {
 
-    val cookies: StateFlow<List<Cookie>> = userDataRepository.tCookies
+    val cookies: StateFlow<List<Cookie>> = userDataRepository.userCookies
         .stateIn(
             viewModelScope,
-            SharingStarted.WhileSubscribed(5.seconds.inWholeMilliseconds),
+            WhileViewSubscribed,
             emptyList(),
         )
 
@@ -32,6 +34,12 @@ class AddCookiesViewModel @Inject constructor(
         Dog.d(TAG, "setUserCookies:\n ${cookies.print()}")
         viewModelScope.launch {
             userDataRepository.setTencentCookies(cookies)
+        }
+    }
+
+    fun onSignIn(uin: String) {
+        viewModelScope.launch {
+            signIn(uin)
         }
     }
 

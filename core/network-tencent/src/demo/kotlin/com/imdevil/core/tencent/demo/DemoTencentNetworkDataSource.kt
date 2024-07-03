@@ -7,6 +7,7 @@ import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.bean.UserInfo
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.core.tencent.moshi.findApiResponseAdapter
@@ -29,14 +30,14 @@ class DemoTencentNetworkDataSource @Inject constructor(
         return assets.open(file).source().buffer().asResponseBody()
     }
 
-    override suspend fun getUserInfo(uin: String): ResponseBody {
-        return makeResponseBody("user_info.json")
+    override suspend fun getUserInfo(): ApiResponse<UserInfo> {
+        val adapter =
+            moshi.findApiResponseAdapter<UserInfo>(MoshiAdapters.USER_INFO_JSON_ADAPTER)
+        val data = adapter.fromJson(assets.open("user_info.json").source().buffer())
+        return data ?: ApiResponse.OtherError(IllegalStateException("Moshi Fail"))
     }
 
-    override suspend fun getPlaylistBriefByUser(
-        uin: String,
-        size: Int
-    ): ApiResponse<List<PlaylistBrief>> {
+    override suspend fun getPlaylistBriefByUser(size: Int): ApiResponse<List<PlaylistBrief>> {
         val adapter =
             moshi.findApiResponseAdapter<List<PlaylistBrief>>(MoshiAdapters.USER_CREATE_PLAYLIST_JSON_ADAPTER)
         val data = adapter.fromJson(assets.open("user_create_playlist.json").source().buffer())

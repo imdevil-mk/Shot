@@ -4,6 +4,7 @@ import com.imdevil.core.tencent.moshi.adapters.HotKeysJsonAdapter
 import com.imdevil.core.tencent.moshi.adapters.NewSongsJsonAdapter
 import com.imdevil.core.tencent.moshi.adapters.RecommendPlaylistJsonAdapter
 import com.imdevil.core.tencent.moshi.adapters.UserCreatePlaylistJsonAdapter
+import com.imdevil.core.tencent.moshi.adapters.UserInfoJsonAdapter
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import com.imdevil.shot.core.network.common.model.MoshiAdapter
 import com.squareup.moshi.JsonAdapter
@@ -19,12 +20,14 @@ object MoshiAdapters {
     const val RECOMMEND_PLAYLIST_JSON_ADAPTER = "RecommendPlaylistJsonAdapter"
     const val HOT_KEYS_JSON_ADAPTER = "HotKeysJsonAdapter"
     const val NEW_SONGS_JSON_ADAPTER = "NewSongsJsonAdapter"
+    const val USER_INFO_JSON_ADAPTER = "UserInfoJsonAdapter"
 
     private val adapters = mapOf<String, JsonAdapter.Factory>(
         USER_CREATE_PLAYLIST_JSON_ADAPTER to UserCreatePlaylistJsonAdapter.newFactory(),
         RECOMMEND_PLAYLIST_JSON_ADAPTER to RecommendPlaylistJsonAdapter.newFactory(),
         HOT_KEYS_JSON_ADAPTER to HotKeysJsonAdapter.newFactory(),
         NEW_SONGS_JSON_ADAPTER to NewSongsJsonAdapter.newFactory(),
+        USER_INFO_JSON_ADAPTER to UserInfoJsonAdapter.newFactory(),
     )
 
     fun get(name: String) = adapters[name]

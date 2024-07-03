@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- todo 采用translationZ的方式来确保header一定绘制在最上面不优雅-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:translationZ="8dp"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageHeaderBehavior">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:title="@string/main_nav_homepage_title"
+            android:layout_height="?actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        android:id="@+id/user_profile"
+        layout="@layout/user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageUserProfileBehavior"
+        app:layout_depends="@id/header" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageTabLayoutBehavior"
+        app:layout_depends="@id/user_profile"
+        app:scroll_depends="@id/user_profile" />
+
+    <com.imdevil.shot.feature.common.widget.NestedScrollableHost
+        android:id="@+id/host"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.imdevil.feature.tencent.ui.behavior.HomePageContentBehavior"
+        app:layout_depends="@id/tab_layout"
+        app:measure_depends="@id/user_profile"
+        app:scroll_depends="@id/tab_layout">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.imdevil.shot.feature.common.widget.NestedScrollableHost>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

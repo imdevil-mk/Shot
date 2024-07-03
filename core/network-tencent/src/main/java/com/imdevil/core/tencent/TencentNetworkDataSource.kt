@@ -3,19 +3,15 @@ package com.imdevil.core.tencent
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.bean.UserInfo
 import com.imdevil.shot.core.network.common.model.ApiResponse
 import okhttp3.ResponseBody
 
 interface TencentNetworkDataSource {
 
-    suspend fun getUserInfo(
-        uin: String,
-    ): ResponseBody
+    suspend fun getUserInfo(): ApiResponse<UserInfo>
 
-    suspend fun getPlaylistBriefByUser(
-        uin: String,
-        size: Int = 200,
-    ): ApiResponse<List<PlaylistBrief>>
+    suspend fun getPlaylistBriefByUser(size: Int = 200): ApiResponse<List<PlaylistBrief>>
 
     suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>>
 

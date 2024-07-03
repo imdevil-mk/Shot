@@ -2,6 +2,9 @@ package com.imdevil.core.tencent.moshi.adapters
 
 import com.imdevil.core.tencent.moshi.MoshiAdapters
 import com.imdevil.shot.core.network.common.model.ApiResponse
+import com.imdevil.shot.core.network.common.model.onBizError
+import com.imdevil.shot.core.network.common.model.onOtherError
+import com.imdevil.shot.core.network.common.model.onSuccess
 import com.imdevil.shot.core.network.common.utils.findAnnotatedMoshiAdapter
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
@@ -48,6 +51,29 @@ class ApiResponseAdapter<T>(
     }
 
     override fun toJson(writer: JsonWriter, value: ApiResponse<T>?) {
+        if (value == null) {
+            throw NullPointerException("value was null! Wrap in .nullSafe() to write nullable values.")
+        }
+
+        writer.beginObject()
+        writer.name("api_response")
+        value.onSuccess {
+            delegate.toJson(writer, it)
+        }.onBizError { code: Int, msg: String ->
+            writer.beginObject()
+            writer.name("code")
+            writer.value(code)
+            writer.name("msg")
+            writer.value(msg)
+            writer.endObject()
+        }.onOtherError {
+            writer.beginObject()
+            writer.name("error")
+            writer.value(it.message)
+            writer.endObject()
+        }
+        writer.endObject()
+
     }
 
     companion object {

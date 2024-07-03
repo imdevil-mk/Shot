@@ -1,9 +1,8 @@
-package com.imdevil.shot.core.model.data
+package com.imdevil.core.tencent.bean
 
-data class TencentUser(
+data class UserInfo(
     val name: String,
     val uin: String,
-    val euin: String,
     val avatar: String,
     val follows: Long,
     val followedSingers: Long,
@@ -12,11 +11,4 @@ data class TencentUser(
     val friends: Long,
     val visitors: Long,
     val icons: List<String>,
-)
-
-val VISITOR = TencentUser(
-    "VISITOR",
-    "VISITOR",
-    "VISITOR",
-    "VISITOR", 0, 0, 0, 0, 0, 0, emptyList()
 )

@@ -4,6 +4,7 @@ import com.imdevil.core.tencent.TencentNetworkDataSource
 import com.imdevil.core.tencent.bean.HotKey
 import com.imdevil.core.tencent.bean.PlaylistBrief
 import com.imdevil.core.tencent.bean.SongBrief
+import com.imdevil.core.tencent.bean.UserInfo
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.okhttp.CookieInterceptor
 import com.imdevil.shot.core.network.common.model.ApiResponse
@@ -43,15 +44,12 @@ class RetrofitTencentNetwork @Inject constructor(
 
     private val api: TencentApi = retrofit.create(TencentApi::class.java)
 
-    override suspend fun getUserInfo(uin: String): ResponseBody {
-        return api.getUserInfo(uin)
+    override suspend fun getUserInfo(): ApiResponse<UserInfo> {
+        return api.getUserInfo()
     }
 
-    override suspend fun getPlaylistBriefByUser(
-        uin: String,
-        size: Int,
-    ): ApiResponse<List<PlaylistBrief>> {
-        return api.getPlaylistBriefByUser(uin, size)
+    override suspend fun getPlaylistBriefByUser(size: Int): ApiResponse<List<PlaylistBrief>> {
+        return api.getPlaylistBriefByUser(size)
     }
 
     override suspend fun getRecommendPlaylist(): ApiResponse<List<PlaylistBrief>> {

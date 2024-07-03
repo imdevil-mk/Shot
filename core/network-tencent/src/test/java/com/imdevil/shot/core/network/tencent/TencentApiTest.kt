@@ -3,6 +3,7 @@ package com.imdevil.shot.core.network.tencent
 import com.imdevil.core.tencent.di.NetworkProvideModule
 import com.imdevil.core.tencent.model.ICookie
 import com.imdevil.core.tencent.retrofit.RetrofitTencentNetwork
+import com.imdevil.shot.core.network.common.model.onSuccess
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -30,7 +31,18 @@ class TencentApiTest {
 
     @Test
     fun testGetUserInfo() = runTest {
-        subject.getUserInfo("")
+        subject.getUserInfo().onSuccess {
+            println(it)
+        }
+    }
+
+    @Test
+    fun getGetPlaylistByUser() = runTest {
+        subject.getPlaylistBriefByUser().onSuccess {
+            for (playlistBrief in it) {
+                println(playlistBrief)
+            }
+        }
     }
 
     @Test

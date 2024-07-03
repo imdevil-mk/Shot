@@ -19,7 +19,7 @@ class TencentCookieManager @Inject constructor(
 
     init {
         scope.launch {
-            userDataRepository.tCookies.collect {
+            userDataRepository.userCookies.collect {
                 cookies.clear()
                 cookies.addAll(it)
             }

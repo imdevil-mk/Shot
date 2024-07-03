@@ -13,6 +13,10 @@ object Dog {
         Log.i("$APP_TAG$tag", msg)
     }
 
+    fun e(tag: String, msg: String) {
+        Log.e("$APP_TAG$tag", msg)
+    }
+
     fun e(tag: String, msg: String, tr: Throwable) {
         Log.e("$APP_TAG$tag", msg, tr)
     }

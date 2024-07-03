@@ -8,20 +8,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.imdevil.core.common.extensions.print
 import com.imdevil.core.common.log.Dog
+import com.imdevil.shot.core.data.viewmodel.SignInEvent
 import com.imdevil.shot.core.model.data.Cookie
 import com.imdevil.shot.feature.common.base.BaseFragment
+import com.imdevil.shot.feature.common.collect
 import com.imdevil.shot.feature.settings.R
 import com.imdevil.shot.feature.settings.databinding.FragmentAddCookiesBinding
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import java.io.IOException
 
 @AndroidEntryPoint
@@ -37,12 +34,26 @@ class AddCookiesFragment : BaseFragment<FragmentAddCookiesBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.cookies.collect(viewLifecycleOwner) {
+            Dog.d(TAG, "User Cookies: ${it.size}")
+            onUserCookiesChanged(it)
+        }
+        viewModel.signInEvent.collect(viewLifecycleOwner) {
+            when (it) {
+                SignInEvent.LOADING -> {
+                    Dog.d(TAG, "signInUiState: LOADING")
+                }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.cookies.collect {
-                    Dog.d(TAG, "User Cookies:\n ${it.print()}")
-                    onUserCookiesChanged(it)
+                SignInEvent.SUCCESS -> {
+                    Dog.d(TAG, "signInUiState: SUCCESS")
+                }
+
+                is SignInEvent.NONE -> {
+                    Dog.d(TAG, "signInUiState: NONE")
+                }
+
+                is SignInEvent.ERROR -> {
+                    Dog.d(TAG, "signInUiState: ERROR")
                 }
             }
         }
@@ -77,7 +88,23 @@ class AddCookiesFragment : BaseFragment<FragmentAddCookiesBinding>() {
             val adapter = CookieListAdapter()
             binding.cookieList.adapter = adapter
             adapter.submitList(cookies)
+
+            signInWithCookies(cookies)
         }
+    }
+
+    private fun signInWithCookies(cookies: List<Cookie>) {
+        var uin: String? = ""
+        cookies.forEach {
+            if (it.name == "uin") {
+                uin = it.value
+            }
+        }
+        if (uin.isNullOrEmpty()) {
+            Dog.e(TAG, "signInWithCookies: error user cookies")
+            return
+        }
+        viewModel.onSignIn(uin!!)
     }
 
     @OptIn(ExperimentalStdlibApi::class)

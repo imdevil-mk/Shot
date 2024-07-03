@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/main_netease"
+        android:id="@+id/main_nav_onboard"
         android:icon="@drawable/ic_netease"
-        android:title="@string/netease_music" />
+        android:title="@string/main_nav_onboard_title" />
 
     <item
-        android:id="@+id/main_qq"
+        android:id="@+id/main_nav_homepage"
         android:icon="@drawable/ic_qq"
-        android:title="@string/qq_music" />
-
-    <item
-        android:id="@+id/main_local"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="@string/local_music" />
+        android:title="@string/main_nav_homepage_title" />
 </menu>

@@ -12,7 +12,7 @@ data class Playlist(
     @Json(name = "disstid")
     val tid: String,
     @Json(name = "dissname")
-    val name: String,
+    val name: String = "",
     @Json(name = "dir_show")
     val dirShow: Int,
     @Json(name = "logo")

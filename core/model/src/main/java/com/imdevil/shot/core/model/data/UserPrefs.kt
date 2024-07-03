@@ -1,5 +1,5 @@
 package com.imdevil.shot.core.model.data
 
-data class UserData(
+data class UserPrefs(
     val theme: Int,
 )

@@ -3,6 +3,14 @@
     <string name="qq_music">QQ音乐</string>
     <string name="tencent_instance_summary">添加QQ音乐Cookie</string>
 
+    <string name="main_nav_onboard_title">首页</string>
+    <string name="main_nav_homepage_title">我的</string>
+
     <string name="feature_recommend">推荐</string>
     <string name="feature_home">我的</string>
+
+    <string name="sign_in_now">立即登录</string>
+    <string name="follows">关注 &lt;b>%1$s&lt;/b></string>
+    <string name="fans">粉丝 &lt;b>%1$s&lt;/b></string>
+    <string name="friends">好友 &lt;b>%1$1s&lt;/b></string>
 </resources>

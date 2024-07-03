@@ -19,6 +19,7 @@ package com.imdevil.core.common.di
 import com.imdevil.core.common.Dispatcher
 import com.imdevil.core.common.ShotDispatchers.Default
 import com.imdevil.core.common.ShotDispatchers.IO
+import com.imdevil.core.common.ShotDispatchers.MAIN
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +33,10 @@ object DispatchersModule {
     @Provides
     @Dispatcher(IO)
     fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @Provides
+    @Dispatcher(MAIN)
+    fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
 
     @Provides
     @Dispatcher(Default)
